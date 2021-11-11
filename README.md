@@ -26,6 +26,6 @@ Finally, we can run the frontend with:
 
 ```sh
 cd frontend
-yarn build
+npm install
 yarn start
 ```
