@@ -32,7 +32,7 @@ const InviteForm = ({_setSignature}) => {
                 });
           }
           else (alert("Enter a valid address"))
-        } else {console.log("We need ethereum dude");}
+        } else {console.log("We need ethereum");}
       } catch (error) {
         console.log(error);
       }
