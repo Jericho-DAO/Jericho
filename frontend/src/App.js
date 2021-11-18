@@ -2,18 +2,22 @@ import './styles/App.css';
 import React, { useState, useEffect } from "react"
 import InviteForm from './components/InviteForm';
 import MintingHammer from './components/MintingHammer.js';
+import { ConnectWallet } from './components/ConnectWallet';
+import { NetworkErrorMessage } from './components/NetworkErrorMessage'; 
 
 function App() {
   
   const { ethereum } = window;
-  const [ account, setAccount ] = useState("");
-
+  const [ account, setAccount ] = useState(undefined);
   const [signature, setSignature] = useState("");
   const [clipboard, setClipboard] = useState(false);
+  const [networkError, setNetworkError] = useState(undefined);
 
   const checkupWallet = async () => {  
     if(!ethereum) {
-      console.log("Yu need to install Metamask");
+      console.log("You need to install Metamask");
+      alert("Get metamask");
+        return;
     }
     else {console.log("We have Metamask");}
 
@@ -26,9 +30,10 @@ function App() {
       //setupEventListener();
     }
     else {console.log("no account connected")};
+    
   };
 
-  const connectWallet = async () => {
+  const _connectWallet = async () => {
 
     try {
 
@@ -40,22 +45,16 @@ function App() {
       const accounts = await ethereum.request({ method: "eth_requestAccounts" });
       console.log(accounts);
       setAccount(accounts[0]);
-      //setupEventListener();
 
     } catch (error) {
       console.log(error);
     }
   }
 
+
   useEffect(() => {
     checkupWallet();
   }, []);
-
-  const renderNotConnectedContainer = () => (
-    <button className="bg-white hover:bg-gray-400 box-border h-16 w-48 text-black text-lg font-bold mb-10 rounded" onClick= {connectWallet}>
-      Connect to Wallet
-    </button>
-  );
 
   const invitLinkButton = () => {
     return (
@@ -74,13 +73,28 @@ function App() {
     )
   }
 
+  // This method just clears part of the state.
+  const _dismissNetworkError = () => {
+    setNetworkError(undefined);
+  }
+
+  if (!account) {
+    return (
+      <ConnectWallet 
+        connectWallet={() => _connectWallet()} 
+        networkError={networkError}
+        dismiss={() => _dismissNetworkError()}
+      />
+    );
+  }
+
+
   return (
     <div className="bg-black text-white h-screen overflow-scroll text-center">
       <div className="flex flex-col justify-start pt-20">
-        <p className="text-6xl bold mb-10">The Forge - Hammer invitation</p>
-        <div>
-         {account === "" ? renderNotConnectedContainer() : ""}
-        </div>
+        <p className="text-6xl bold mb-10">The Forge summons</p>
+        <p className="text-3xl semibold mb-10">The rules</p>
+        <p>Anvil ownership unlocks 3 summons per blacksmith:</p>
         <div className="my-4">
           <InviteForm _setSignature={setSignature}/>
         </div>
