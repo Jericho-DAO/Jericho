@@ -25,5 +25,12 @@ module.exports = {
       url: process.env.STAGING_ALCHEMY_KEY,
       accounts: [process.env.PRIVATE_KEY],
     },
+    hardhat: {
+      chainId: 1337
+    },
+    localhost: {
+      url: "http://localhost:8545",
+      chainId: 1337
+    },
   },
 };
