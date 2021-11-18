@@ -114,7 +114,10 @@ function App() {
 
   if (hasHammer) {
     return (
-      <TheRegister />
+      <div>
+        <p className="text-md mb-10 text-center">{account}</p>
+        <TheRegister />
+      </div>
     );
   }
 
@@ -123,6 +126,7 @@ function App() {
       <div className="bg-black text-white h-screen overflow-scroll">
         <div className="flex flex-col pt-20">
           <p className="text-6xl bold mb-10 text-center">The Forge summons</p>
+          <p className="text-md mb-10 text-center">{account}</p>
           <p className="text-3xl semibold mb-10 text-center">The rules</p>
           <p className="ml-36 mb-5">Anvil ownership unlocks 3 summons per blacksmith:</p>
           <ul className="ml-40 mb-10 list-disc list-inside">
@@ -147,6 +151,7 @@ function App() {
       <div className="bg-black text-white h-screen overflow-scroll">
         <div className="flex flex-col pt-20">
           <p className="text-6xl bold mb-10 text-center">The Forge</p>
+          <p className="text-md mb-10 text-center">{account}</p>
           <p className="text-3xl semibold mb-10 text-center">You have no anvil, no hammer</p>
           <p className="text-3xl semibold mb-10 text-center">come back when you have one you morron</p>
         </div>
