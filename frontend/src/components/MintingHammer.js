@@ -43,7 +43,7 @@ const MintingHammer = () => {
             className="block text-gray-700 text-lg font-bold mb-2"
             htmlFor="invitation"
           >
-            Paste in your invitation?
+            Who will you summon?
           </label>
           <input
             className="bg-white focus:outline-none focus:shadow-outline border border-gray-300 text-black rounded-lg py-2 px-4 block w-full appearance-none leading-normal"
@@ -51,11 +51,11 @@ const MintingHammer = () => {
             id="invitation"
             onChange={(e) => setInvitationMinting(e.target.value)}
             value={invitationMinting}
-            placeholder="Your invitation..."
+            placeholder="Insert wallet address..."
           />
         </div>
         <button className="bg-white hover:bg-gray-400 box-border h-16 w-48 text-black text-base font-bold mb-10 rounded" onClick={handleSubmit}>
-          Mint invitation hammer
+          Summon
         </button>
       </form>
     )
