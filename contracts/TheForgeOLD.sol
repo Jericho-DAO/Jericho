@@ -9,8 +9,6 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Burnable.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 
-import "./VerifySignature.sol";
-
 contract TheForgeOLD is ERC721, ERC721Enumerable, ERC721URIStorage, Pausable, Ownable, ERC721Burnable {
     using Counters for Counters.Counter;
 
@@ -25,11 +23,11 @@ contract TheForgeOLD is ERC721, ERC721Enumerable, ERC721URIStorage, Pausable, Ow
         AddressVS = _AddressVS;
     }
     
-    function callVerify(address _signer, address _to, bytes memory signature) public view returns (bool){
-        require(AddressVS != address(0));
-        VerifySignature vs = VerifySignature(AddressVS);
-        return vs.verify(_signer, _to, signature);
-    }
+    // function callVerify(address _signer, address _to, bytes memory signature) public view returns (bool){
+    //     require(AddressVS != address(0));
+    //     VerifySignature vs = VerifySignature(AddressVS);
+    //     return vs.verify(_signer, _to, signature);
+    // }
     
     // Mapping from address to Anvil ID
     mapping(address => uint256) private _ownersAnvil;
@@ -53,7 +51,7 @@ contract TheForgeOLD is ERC721, ERC721Enumerable, ERC721URIStorage, Pausable, Ow
     function safeMint(address to, address invintingAddress, bytes memory invitationSignature) public {
         
         //Check that the invitation was indeed created by the invintingAddress and that the address 'to' is the invitee by comparing these inputs to the signature
-        require(callVerify(invintingAddress, to, invitationSignature));
+        // require(callVerify(invintingAddress, to, invitationSignature));
 
         uint256 tokenId = _tokenIdCounter.current();
         _tokenIdCounter.increment();

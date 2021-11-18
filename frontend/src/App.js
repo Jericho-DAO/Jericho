@@ -1,9 +1,13 @@
 import './styles/App.css';
+import { ethers } from "ethers";
 import React, { useState, useEffect } from "react"
-import InviteForm from './components/InviteForm';
 import MintingHammer from './components/MintingHammer.js';
+import TheRegister from './components/TheRegister.js';
 import { ConnectWallet } from './components/ConnectWallet';
 import { NetworkErrorMessage } from './components/NetworkErrorMessage'; 
+import TheForge from "./contracts/TheForge.json";
+
+const CONTRACT_ADDRESS_THEFORGE = "0xE5868B98E594510788F469ec5ca0440FCAb05873";
 
 function App() {
   
@@ -12,6 +16,7 @@ function App() {
   const [signature, setSignature] = useState("");
   const [clipboard, setClipboard] = useState(false);
   const [networkError, setNetworkError] = useState(undefined);
+  const [hasHammer, setHasHammer] = useState(false);
 
   const checkupWallet = async () => {  
     if(!ethereum) {
@@ -27,6 +32,16 @@ function App() {
     if (ethAccount.length !== 0) {
       setAccount(ethAccount[0]);
       console.log("Account connected")
+      const provider = new ethers.providers.Web3Provider(ethereum);
+      const signer = provider.getSigner();
+      const connectedContract = new ethers.Contract(CONTRACT_ADDRESS_THEFORGE, TheForge.abi, signer);
+      const balance = await connectedContract.balanceOf(ethAccount[0], 0);
+
+      console.log("balance for hammer ", balance, balance > 0);
+      if (balance > 0) {
+        setHasHammer(true);
+      }
+
       //setupEventListener();
     }
     else {console.log("no account connected")};
@@ -88,6 +103,11 @@ function App() {
     );
   }
 
+  if (hasHammer) {
+    return (
+      <TheRegister />
+    );
+  }
 
   return (
     <div className="bg-black text-white h-screen overflow-scroll">
@@ -104,10 +124,6 @@ function App() {
           <li className="mb-2">Successful apprenticeship unlocks anvil ownership.</li>
           <li className="mb-2">If the application isn’t accepted, the person can sell the hammer NFT on the secondary market.</li>
         </ul>
-        {/* <div className="my-4 text-center">
-          <InviteForm _setSignature={setSignature}/>
-        </div> */}
-        {/* {signature === "" ? "" : invitLinkButton()} */}
         <div className="mt-6 text-center">
           <MintingHammer />
         </div>

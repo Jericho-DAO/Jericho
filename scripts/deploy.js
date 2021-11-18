@@ -1,15 +1,27 @@
 const { ethers } = require("hardhat");
 
 const main = async () => {
-    const contractFactory = await hre.ethers.getContractFactory("TheForge");
+    const [owner] = await ethers.getSigners();
+
+    const contractFactory = await ethers.getContractFactory("TheForge");
     const contract = await contractFactory.deploy();
     await contract.deployed();
     console.log("Contract is deployed on:", contract.address);
 
+    const accounts = [owner.address, "0x06B5cB0300F69Ef69581C42dDA9216CEf0A18a53"];
+    const amounts = ["3", "3"];
 
-    // let minting2 = await contract.makeAnEpicNFT();
+    let res = await contract.addInvite(accounts, amounts);
 
-    // await minting2.wait();
+    res = await contract.hasInvite("0x06B5cB0300F69Ef69581C42dDA9216CEf0A18a53")
+
+    const num = new ethers.BigNumber.from(res)
+
+    console.log("result ", num.toNumber());
+
+    // res = await contract.mint("0x06B5cB0300F69Ef69581C42dDA9216CEf0A18a53");
+
+    // await res.wait();
 
 
 };
