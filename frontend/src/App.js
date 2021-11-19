@@ -1,10 +1,17 @@
 import './styles/App.css';
 import { ethers } from "ethers";
 import React, { useState, useEffect } from "react"
+
+// Components with logic
 import MintingHammer from './components/MintingHammer.js';
 import TheRegister from './components/TheRegister.js';
-import { ConnectWallet } from './components/ConnectWallet';
-import { NetworkErrorMessage } from './components/NetworkErrorMessage'; 
+
+// Components without any logic, they are just presentational ones
+import { NoWalletDetected } from "./components/presentationals/NoWalletDetected";
+import { ConnectWallet } from './components/presentationals/ConnectWallet';
+import { NetworkErrorMessage } from './components/presentationals/NetworkErrorMessage'; 
+import _connectWallet from './components/Initialize.js'
+
 import TheForge from "./contracts/TheForge.json";
 import Anvil from "./contracts/AnvilTheForge.json";
 
@@ -15,86 +22,21 @@ function App() {
   
   const { ethereum } = window;
   const [ account, setAccount ] = useState(undefined);
-  const [signature, setSignature] = useState("");
-  const [clipboard, setClipboard] = useState(false);
-  const [networkError, setNetworkError] = useState(undefined);
-  const [hasHammer, setHasHammer] = useState(false);
-  const [hasAnvil, setHasAnvil] = useState(false);
+  const [ hasHammer, setHasHammer ] = useState(false);
+  const [ theForgeSC, setTheForgeSC ] = useState(false);
+  const [ hasAnvil, setHasAnvil ] = useState(false);
+  const [ anvilSC, setAnvilSC ] = useState(false);
+  const [ networkError, setNetworkError ] = useState(undefined);
+  const [ txBeingSent, setTxBeingSent ] = useState(undefined)
+  const [ transactionError, setTransactionError ] = useState(undefined)
 
-  const checkupWallet = async () => {  
-    if(!ethereum) {
-      console.log("You need to install Metamask");
-      alert("Get metamask");
-        return;
-    }
-    else {console.log("We have Metamask");}
-
-    const ethAccount = await ethereum.request({ method: 'eth_accounts' });
-    console.log("account", ethAccount);
-
-    if (ethAccount.length !== 0) {
-      setAccount(ethAccount[0]);
-      console.log("Account connected")
-      const provider = new ethers.providers.Web3Provider(ethereum);
-      const signer = provider.getSigner();
-      const theForgeContract = new ethers.Contract(CONTRACT_ADDRESS_THEFORGE, TheForge.abi, signer);
-      const anvilContract = new ethers.Contract(CONTRACT_ADDRESS_ANVIL, Anvil.abi, signer);
-      const balanceHammer = await theForgeContract.balanceOf(ethAccount[0], 0);
-      const balanceAnvil = await anvilContract.balanceOf(ethAccount[0]);
-
-      console.log("balance for anvil ", balanceAnvil, balanceAnvil > 0);
-      if (balanceHammer > 0) {
-        setHasHammer(true);
-      }
-
-      if (balanceAnvil > 0) {
-        setHasAnvil(true);
-      }
-
-      //setupEventListener();
-    }
-    else {console.log("no account connected")};
-    
-  };
-
-  const _connectWallet = async () => {
-
-    try {
-
-      if (!ethereum) {
-        alert("Get metamask");
-        return;
-        }
-
-      const accounts = await ethereum.request({ method: "eth_requestAccounts" });
-      console.log(accounts);
-      setAccount(accounts[0]);
-
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-
-  useEffect(() => {
-    checkupWallet();
-  }, []);
-
-  const invitLinkButton = () => {
-    return (
-      <>
-        <div className="bg-white text-black overflow-x-scroll rounded px-6 pt-2 pb-2 mb-4  max-w-md mx-auto sm:max-w-xl">
-          <button className="text-left">
-            {signature === "" ? "": "Your invitation link: " + signature }
-          </button>
-        </div>
-        <button onClick={() => {
-          navigator.clipboard.writeText(signature);
-          setClipboard(true);}}>
-          {clipboard ? "Copied!" : "Copy to clipboard"}
-        </button>
-      </>
-    )
+  const resetState = () => {
+    setAccount(undefined)
+    setTxBeingSent(undefined)
+    setTransactionError(undefined)
+    setNetworkError(undefined)
+    setHasHammer(false)
+    setHasAnvil(false)
   }
 
   // This method just clears part of the state.
@@ -102,10 +44,24 @@ function App() {
     setNetworkError(undefined);
   }
 
+  if (ethereum === undefined) {
+    return <NoWalletDetected />;
+  }
+
   if (!account) {
     return (
       <ConnectWallet 
-        connectWallet={() => _connectWallet()} 
+        connectWallet={() => {
+           _connectWallet({
+             setAccount,
+             setHasHammer,
+             setTheForgeSC,
+             setHasAnvil,
+             setAnvilSC,
+             setNetworkError,
+             resetState
+           })
+        }} 
         networkError={networkError}
         dismiss={() => _dismissNetworkError()}
       />
@@ -121,7 +77,7 @@ function App() {
     );
   }
 
-  if (hasAnvil) {
+  if (!hasAnvil) {
     return (
       <div className="bg-black text-white h-screen overflow-scroll">
         <div className="flex flex-col pt-20">
@@ -159,4 +115,4 @@ function App() {
   )
 }
 
-  export default App;
+export default App;

@@ -7,6 +7,7 @@ const main = async () => {
     const contract = await contractFactory.deploy();
     await contract.deployed();
     console.log("Contract is deployed on:", contract.address);
+    console.log(owner.address)
 
     const accounts = [owner.address, "0x06B5cB0300F69Ef69581C42dDA9216CEf0A18a53"];
     const amounts = ["3", "3"];

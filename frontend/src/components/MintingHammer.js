@@ -1,15 +1,15 @@
 import { ethers } from "ethers";
 import React, { useState, useEffect } from "react"
-import TheForge from "./../contracts/TheForge.json";
 
+import TheForge from "./../contracts/TheForge.json";
 
 const CONTRACT_ADDRESS_THEFORGE = "0xE5868B98E594510788F469ec5ca0440FCAb05873";
 
 const MintingHammer = () => {
     
   const { ethereum } = window;
-  const [addressInvitee, setAddressInvitee] = useState("");
-  const [connectedContract, setConnectedContract] = useState("");
+  const [ addressInvitee, setAddressInvitee ] = useState("");
+  const [ connectedContract, setConnectedContract ] = useState("");
   const [ nbInvite, setNbInvite ] = useState("");
 
   useEffect(() => {
@@ -19,7 +19,7 @@ const MintingHammer = () => {
       const addressUser = await signer.getAddress();
       const contract = new ethers.Contract(CONTRACT_ADDRESS_THEFORGE, TheForge.abi, signer);
 
-      const balance = await contract.hasInvite(addressUser);
+      // const balance = await contract.hasInvite(addressUser);
 
       setConnectedContract(contract);
     }
