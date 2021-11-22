@@ -10,7 +10,7 @@ import TheRegister from './components/TheRegister.js';
 import { NoWalletDetected } from "./components/presentationals/NoWalletDetected";
 import { ConnectWallet } from './components/presentationals/ConnectWallet';
 import { NetworkErrorMessage } from './components/presentationals/NetworkErrorMessage'; 
-import _connectWallet from './components/Initialize.js'
+import initialize from './components/Initialize.js'
 
 import TheForge from "./contracts/TheForge.json";
 import Anvil from "./contracts/AnvilTheForge.json";
@@ -52,7 +52,7 @@ function App() {
     return (
       <ConnectWallet 
         connectWallet={() => {
-           _connectWallet({
+           initialize({
              setAccount,
              setHasHammer,
              setTheForgeSC,

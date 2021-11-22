@@ -11,7 +11,7 @@ const HARDHAT_ID = '1337';
 const RINKEBY_ID = '4';
 
 
-const _connectWallet = async (stateManagement) => {
+const initialize = async (stateManagement) => {
   const { setAccount, setNetworkError, resetState } = stateManagement;
 
   try {
@@ -88,4 +88,4 @@ const _intializeEthers = async (selectedAddress, stateManagement) => {
   }
 }
 
-export default _connectWallet;
+export default initialize;
