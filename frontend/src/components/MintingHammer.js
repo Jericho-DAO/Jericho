@@ -1,38 +1,20 @@
 import { ethers } from "ethers";
 import React, { useState, useEffect } from "react"
 
-import TheForge from "./../contracts/TheForge.json";
 
-const CONTRACT_ADDRESS_THEFORGE = "0xE5868B98E594510788F469ec5ca0440FCAb05873";
-
-const MintingHammer = () => {
+const MintingHammer = (state) => {
     
   const { ethereum } = window;
   const [ addressInvitee, setAddressInvitee ] = useState("");
-  const [ connectedContract, setConnectedContract ] = useState("");
-  const [ nbInvite, setNbInvite ] = useState("");
 
-  useEffect(() => {
-    async function getContract() {
-      const provider = new ethers.providers.Web3Provider(ethereum);
-      const signer = provider.getSigner();
-      const addressUser = await signer.getAddress();
-      const contract = new ethers.Contract(CONTRACT_ADDRESS_THEFORGE, TheForge.abi, signer);
+  const { hasInvite, theForgeSC } = state.props;
 
-      // const balance = await contract.hasInvite(addressUser);
-
-      setConnectedContract(contract);
-    }
-
-    getContract();
-  }, [])
-  
   const mintHammer = async () => {
     try {
       if (ethereum) {
         if(ethers.utils.isAddress(addressInvitee)) {
           console.log("Going to pop wallet now to pay gas...")
-          let tx = await connectedContract.mint(addressInvitee);
+          let tx = await theForgeSC.mint(addressInvitee);
           console.log("Mining...please wait.")
           await tx.wait()
           console.log(`Mined, see transaction: https://rinkeby.etherscan.io/tx/${tx.hash}`);
@@ -45,7 +27,9 @@ const MintingHammer = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    mintHammer();
+    if (hasInvite > 0 ) {
+      mintHammer();
+    } else {alert("Sorry, you have no invitation left")}
   }
   
   return (

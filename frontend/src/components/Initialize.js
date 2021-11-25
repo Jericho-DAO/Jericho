@@ -18,7 +18,7 @@ const initialize = async (stateManagement) => {
 
     const [selectedAddress] = await window.ethereum.enable();
 
-    console.log(selectedAddress)
+    console.log("selectedAddress", selectedAddress)
     if (window.ethereum.networkVersion !== HARDHAT_ID && window.ethereum.networkVersion !== RINKEBY_ID) {
       setNetworkError("Please connect Metamask to LocalHost:8545 or Rinkeby")
 
@@ -62,7 +62,7 @@ const _initialize = (selectedAddress, stateManagement) => {
 }
 
 const _intializeEthers = async (selectedAddress, stateManagement) => {
-  const { setHasHammer, setTheForgeSC, setHasAnvil, setAnvilSC } = stateManagement;
+  const { setHasHammer, setTheForgeSC, setHasAnvil, setAnvilSC, setHasInvite } = stateManagement;
   try {
 
     // We initialize ethers by creating a provider using window.ethereum
@@ -73,11 +73,14 @@ const _intializeEthers = async (selectedAddress, stateManagement) => {
     console.log(selectedAddress)
     const balanceHammer = await theForgeContract.balanceOf(selectedAddress, 0);
     const balanceAnvil = await anvilContract.balanceOf(selectedAddress);
+    const balanceInvite = await theForgeContract.hasInvite(selectedAddress);
 
     setTheForgeSC(theForgeContract);
     setAnvilSC(anvilContract);
+    setHasInvite(balanceInvite);
 
     console.log("balance for anvil ", balanceAnvil, balanceAnvil > 0);
+    console.log("invitebalance", balanceInvite>0);
 
     if (balanceHammer > 0) setHasHammer(true);
 
