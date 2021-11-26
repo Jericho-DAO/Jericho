@@ -4,7 +4,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        'crimson': 'Crimson Text'
+        body: ['Crimson Pro']
       }
     },
   },
