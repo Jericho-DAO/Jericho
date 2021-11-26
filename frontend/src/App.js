@@ -54,7 +54,7 @@ export default function App() {
 
 	const Layout = () => {
 		return (
-			<div className="bg-black text-white h-screen">
+			<div className="bg-black text-white min-h-screen">
 				<NavBar
 					connectWallet={connectWallet}
 					account={account}

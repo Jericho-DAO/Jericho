@@ -39,13 +39,11 @@ const TheRegister = (state) => {
   }
 
   return (
-    <div className="flex flex-row">
-      <div className="flex-grow w-16"></div>
-      <div class="flex-shrink w-4/5 h-auto">
+    <div className="flex flex-col items-center">
+      <div className="flex-shrink w-11/12 sm:w-3/5 h-auto">
         <p className="text-6xl bold my-8 text-center">The Register</p>
         { hasHammer ? displayHasHammer() : displayNoHammer() }
       </div>
-      <div class="flex-grow w-16"></div>
     </div>
   );
 }
