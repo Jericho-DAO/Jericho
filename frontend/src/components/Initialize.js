@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from "react"
 import { ethers } from "ethers";
 
 import TheForge from "../contracts/TheForge.json";
@@ -62,7 +61,7 @@ const _initialize = (selectedAddress, stateManagement) => {
 }
 
 const _intializeEthers = async (selectedAddress, stateManagement) => {
-  const { setHasHammer, setTheForgeSC, setHasAnvil, setAnvilSC, setHasInvite } = stateManagement;
+  const { setHasHammer, setTheForgeSC, setHasAnvil, setHasInvite } = stateManagement;
   try {
 
     // We initialize ethers by creating a provider using window.ethereum
@@ -76,7 +75,6 @@ const _intializeEthers = async (selectedAddress, stateManagement) => {
     const balanceInvite = await theForgeContract.hasInvite(selectedAddress);
 
     setTheForgeSC(theForgeContract);
-    setAnvilSC(anvilContract);
     setHasInvite(balanceInvite);
 
     console.log("balance for anvil ", balanceAnvil, balanceAnvil > 0);

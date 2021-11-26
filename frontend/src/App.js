@@ -5,8 +5,6 @@ import { Outlet, Routes, Route } from 'react-router-dom';
 import Summon from './components/Summon';
 import { NavBar } from './components/presentationals/NavBar';
 import initialize from './components/Initialize.js';
-import logo from "./images/Logo.png";
-import { NetworkErrorMessage } from './components/presentationals/NetworkErrorMessage';
 import { NoWalletDetected } from './components/presentationals/NoWalletDetected';
 import TheRegister from './components/TheRegister';
 import { HomePage } from './components/presentationals/HomePage';
@@ -18,16 +16,15 @@ export default function App() {
 	const [ hasHammer, setHasHammer ] = useState(false);
 	const [ theForgeSC, setTheForgeSC ] = useState(false);
 	const [ hasAnvil, setHasAnvil ] = useState(false);
-	const [ anvilSC, setAnvilSC ] = useState(false);
 	const [ hasInvite, setHasInvite ] = useState(false);
 	const [ networkError, setNetworkError ] = useState(undefined);
-	const [ txBeingSent, setTxBeingSent ] = useState(undefined)
-	const [ transactionError, setTransactionError ] = useState(undefined);
+	// const [ txBeingSent, setTxBeingSent ] = useState(undefined)
+	// const [ transactionError, setTransactionError ] = useState(undefined);
 
 	const resetState = () => {
 		setAccount(undefined)
-		setTxBeingSent(undefined)
-		setTransactionError(undefined)
+		// setTxBeingSent(undefined)
+		// setTransactionError(undefined)
 		setNetworkError(undefined)
 		setHasHammer(false)
 		setHasAnvil(false)
@@ -49,7 +46,6 @@ export default function App() {
 			setHasHammer,
 			setTheForgeSC,
 			setHasAnvil,
-			setAnvilSC,
 			setHasInvite,
 			setNetworkError,
 			resetState

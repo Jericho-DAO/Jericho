@@ -1,6 +1,5 @@
 import React from "react";
 import logo from "../../images/Logo.png";
-import { NavBar } from "./NavBar"
 import { NetworkErrorMessage } from "./NetworkErrorMessage";
 
 export function HomePage({ networkError, dismiss, account }) {

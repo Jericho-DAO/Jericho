@@ -19,7 +19,7 @@ const TheRegister = (state) => {
       <div>
         <p className="text-xl text-center mb-10">Congratulations, you are a proud owner of a hammer.</p>
         <iframe 
-          className=""
+          title="Airtable the register"
           src="https://airtable.com/embed/shr8SeKKTQlnJJpO4?backgroundColor=gray" 
           frameBorder="0" onmousewheel="" width="100%" height="2000" 
         />

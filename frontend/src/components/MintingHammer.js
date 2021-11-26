@@ -1,5 +1,5 @@
   import { ethers } from "ethers";
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 
 
 const MintingHammer = (state) => {
@@ -34,8 +34,8 @@ const MintingHammer = (state) => {
   // max-w-md sm:max-w-xl
   return (
     <div className="flex flex-row">
-      <div class="flex-grow w-16"></div>
-      <div class="flex-shrink w-3/5 h-auto">
+      <div className="flex-grow w-16"></div>
+      <div className="flex-shrink w-3/5 h-auto">
         <form className="flex flex-col items-center">
           <div className="bg-white rounded w-full px-5 pt-6 pb-8 mb-4">
             <label
@@ -58,7 +58,7 @@ const MintingHammer = (state) => {
           </button>
         </form>
       </div>
-      <div class="flex-grow w-16"></div>
+      <div className="flex-grow w-16"></div>
     </div>
   )
 }
