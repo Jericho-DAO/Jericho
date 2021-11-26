@@ -1,27 +1,43 @@
 import React, { Fragment } from "react";
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import logo from "../../images/Logo.png";
 
 const navigation = [
-  { name: 'App', href: 'app', current: true },
-  { name: 'Team', href: 'Team', current: false },
-  { name: 'Projects', href: 'Project', current: false },
-  { name: 'Calendar', href: 'Calender', current: false },
+  { name: 'Summon', href: 'summon', current: true },
+  { name: 'Register', href: 'register', current: false },
 ]
+                        // className={isActive => ({
+                        //   isActive ? 'bg-gray-900 text-white px-3 py-2 rounded-md font-medium' : 'text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md font-medium'
+                        // })}
 
+                        // className={classNames(
+                        //   item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                        //   'px-3 py-2 rounded-md font-medium'
+                        // )}
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export function NavBar({ connectWallet }) {
+function displayAddress(account) {
+  let displayAddress = "";
+  if (account !== "") {
+    const firstLetters = account?.slice(0, 6);
+    const lastLetters = account?.slice(-4);
+
+    displayAddress = `${firstLetters}...${lastLetters}`;
+  }
+  return displayAddress
+}
+
+export function NavBar({ connectWallet, account }) {
   return (
     <Disclosure as="nav" className="bg-black text-white">
       {({ open }) => (
         <>
-          <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+          <div className="max-w-7xl mx-auto sm:px-6 pt-4">
             <div className="relative flex items-center justify-between h-16">
               <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                 {/* Mobile menu button*/}
@@ -35,49 +51,44 @@ export function NavBar({ connectWallet }) {
                 </Disclosure.Button>
               </div>
               <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
+                <NavLink to={''}>
+                  <img
+                    className="h-16 w-16"
+                    src={logo}
+                    alt="logo"
+                  />
+                </NavLink>
                 <div className="flex-shrink-0 flex items-center">
-                  <img
-                    className="block lg:hidden h-16 w-16"
-                    src={logo}
-                    alt="logo"
-                  />
-                  <img
-                    className="hidden lg:block h-16 w-16"
-                    src={logo}
-                    alt="logo"
-                  />
-                  <h1 className="hidden lg:block text-2xl">The Forge</h1>
-                </div>
-                <div className="hidden sm:block sm:ml-6">
-                  <div className="flex space-x-4">
+                  <div className="hidden sm:block sm:ml-6 space-x-4">
                     {navigation.map((item) => (
-                      <Link
+                      <NavLink
                         key={item.name}
                         to={item.href}
-                        className={classNames(
-                          item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                          'px-3 py-2 rounded-md text-sm font-medium'
-                        )}
-                        aria-current={item.current ? 'page' : undefined}
+                        className={item => {
+                          const base = 'px-3 py-2 rounded-md text-lg font-medium '
+                          const style = item.isActive ? 'bg-gray-900 text-white ' : 'text-gray-300 hover:bg-gray-700 hover:text-white'
+
+                          return base + style;
+                        }}
                       >
                         {item.name}
-                      </Link>
+                      </NavLink>
                     ))}
                   </div>
                 </div>
               </div>
-              <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
 
-                {/* Connect Wallet */}
+              {/* Connect Wallet */}
+              <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 <button
-                  className="inline-flex justify-center py-2 px-4 shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700"
+                  className="inline-flex justify-center py-2 px-4 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700"
                   type="button"
                   onClick={connectWallet}
                 >
-                  Connect
+                  {account === undefined ? "Connect" : displayAddress(account)}
                 </button>
-
               </div>
+
             </div>
           </div>
 

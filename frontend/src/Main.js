@@ -85,7 +85,10 @@ export default function Main() {
 	const Layout = () => {
 		return (
 			<div>
-				<NavBar connectWallet={connectWallet}/>
+				<NavBar
+					connectWallet={connectWallet}
+					account={account}
+				/>
 					<Outlet />
 			</div>
 		);
@@ -101,7 +104,7 @@ export default function Main() {
 				<Route
 					path="*"
 					element={
-						<main className="bg-black text-white h-screen overflow-scroll">
+						<main className="bg-black text-white h-screen overflow-auto">
 								<p className="text-3xl semibold mt-20 text-center">There's nothing here!</p>
 						</main>
 					}
