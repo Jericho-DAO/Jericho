@@ -31,29 +31,35 @@ const MintingHammer = (state) => {
       mintHammer();
     } else {alert("Sorry, you have no invitation left")}
   }
-  
+  // max-w-md sm:max-w-xl
   return (
-    <form className="">
-      <div className="bg-white rounded px-8 pt-6 pb-8 mb-4 max-w-md mx-auto sm:max-w-xl">
-        <label
-          className="block text-gray-700 text-lg font-bold mb-2"
-          htmlFor="invitation"
-        >
-          Who will you summon?
-        </label>
-        <input
-          className="bg-white focus:outline-none focus:shadow-outline border border-gray-300 text-black rounded-lg py-2 px-4 block w-full appearance-none leading-normal"
-          type="string"
-          id="invitation"
-          onChange={(e) => setAddressInvitee(e.target.value)}
-          value={addressInvitee}
-          placeholder="Insert wallet address..."
-        />
+    <div className="flex flex-row">
+      <div class="flex-grow w-16"></div>
+      <div class="flex-shrink w-3/5 h-auto">
+        <form className="flex flex-col items-center">
+          <div className="bg-white rounded w-full px-5 pt-6 pb-8 mb-4">
+            <label
+              className="block text-gray-700 text-lg font-bold mb-2"
+              htmlFor="invitation"
+            >
+              Who will you summon?
+            </label>
+            <input
+              className="bg-white focus:outline-none focus:shadow-outline border border-gray-300 text-black rounded-lg  py-2 px-4 flex w-full appearance-none leading-normal"
+              type="string"
+              id="invitation"
+              onChange={(e) => setAddressInvitee(e.target.value)}
+              value={addressInvitee}
+              placeholder="Insert wallet address..."
+            />
+          </div>
+          <button className="bg-white hover:bg-gray-400 box-border h-16 text-black text-base w-auto px-8 font-bold rounded" onClick={handleSubmit}>
+            Summon
+          </button>
+        </form>
       </div>
-      <button className="bg-white hover:bg-gray-400 box-border h-16 w-48 text-black text-base font-bold mb-10 rounded" onClick={handleSubmit}>
-        Summon
-      </button>
-    </form>
+      <div class="flex-grow w-16"></div>
+    </div>
   )
 }
 

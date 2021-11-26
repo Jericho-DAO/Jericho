@@ -3,11 +3,9 @@ import logo from "../../images/Logo.png";
 import { NavBar } from "./NavBar"
 import { NetworkErrorMessage } from "./NetworkErrorMessage";
 
-export function ConnectWallet({ connectWallet, networkError, dismiss }) {
+export function ConnectWallet({ networkError, dismiss }) {
   return (
-    <div className="bg-black text-white h-screen">
-
-      <NavBar connectWallet={connectWallet}/>
+    <div className="bg-black text-white">
       <div className="flex flex-col items-center">
         <img src={logo} className="w-52 h-52" alt="logo" />
         <div className="text-center">

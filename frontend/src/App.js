@@ -9,8 +9,9 @@ import logo from "./images/Logo.png";
 import { NetworkErrorMessage } from './components/presentationals/NetworkErrorMessage';
 import { NoWalletDetected } from './components/presentationals/NoWalletDetected';
 import TheRegister from './components/TheRegister';
+import { ConnectWallet } from './components/presentationals/ConnectWallet';
 
-export default function Main() {
+export default function App() {
 
 	const { ethereum } = window;
 	const [ account, setAccount ] = useState(undefined);
@@ -54,10 +55,15 @@ export default function Main() {
 			resetState
 		})
 	}
-	
-	const Welcome = () => {
+
+	const HomePage = () => {
+		
+		if (account === undefined) {
+			return <ConnectWallet networkError={networkError} dismiss={() => _dismissNetworkError()}/>
+		}
+
 		return (
-			<div className="bg-black text-white h-screen">
+			<div>
 				<div className="flex flex-col items-center">
 					<img src={logo} className="w-52 h-52" alt="logo" />
 					<div className="text-center">
@@ -75,7 +81,7 @@ export default function Main() {
 						)}
 					</div>
 					<div className="p-4 text-center">
-						<p>Please connect to your wallet.</p>
+						<p>You have X and Y hammer</p>
 					</div>
 				</div>
 			</div>
@@ -84,7 +90,7 @@ export default function Main() {
 
 	const Layout = () => {
 		return (
-			<div>
+			<div className="bg-black text-white h-screen">
 				<NavBar
 					connectWallet={connectWallet}
 					account={account}
@@ -98,13 +104,16 @@ export default function Main() {
 	return (
 		<Routes>
 			<Route  element={<Layout />}>
-				<Route path="/" element={<Welcome />} />
-				<Route path="app" element={<Summon props={ {account, hasAnvil, hasInvite, theForgeSC } }/>} />
-				<Route path="team" element={<TheRegister props={hasHammer}/>} />
+				<Route 
+					path="/"
+					element={<HomePage/>}
+				/>
+				<Route path="app" element={<Summon props={ { account, hasAnvil, hasInvite, theForgeSC, networkError, _dismissNetworkError } }/>} />
+				<Route path="team" element={<TheRegister props={ { hasHammer, account, networkError, _dismissNetworkError } }/>} />
 				<Route
 					path="*"
 					element={
-						<main className="bg-black text-white h-screen overflow-auto">
+						<main className="bg-black text-white overflow-scroll">
 								<p className="text-3xl semibold mt-20 text-center">There's nothing here!</p>
 						</main>
 					}
