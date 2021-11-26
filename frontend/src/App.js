@@ -108,8 +108,8 @@ export default function App() {
 					path="/"
 					element={<HomePage/>}
 				/>
-				<Route path="app" element={<Summon props={ { account, hasAnvil, hasInvite, theForgeSC, networkError, _dismissNetworkError } }/>} />
-				<Route path="team" element={<TheRegister props={ { hasHammer, account, networkError, _dismissNetworkError } }/>} />
+				<Route path="summon" element={<Summon props={ { account, hasAnvil, hasInvite, theForgeSC, networkError, _dismissNetworkError } }/>} />
+				<Route path="register" element={<TheRegister props={ { hasHammer, account, networkError, _dismissNetworkError } }/>} />
 				<Route
 					path="*"
 					element={
