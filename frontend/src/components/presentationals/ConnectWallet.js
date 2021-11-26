@@ -9,8 +9,8 @@ export function ConnectWallet({ networkError, dismiss }) {
       <div className="flex flex-col items-center">
         <img src={logo} className="w-52 h-52" alt="logo" />
         <div className="text-center">
-          <h1 className="text-5xl">The Forge</h1>
-          <p className="mt-2">
+          <h1 className="text-7xl mt-4">The Forge</h1>
+          <p className="text-lg mt-6">
             A place where crypto entrepreneurs learn, meet and buidl together.
           </p>
 
@@ -22,7 +22,7 @@ export function ConnectWallet({ networkError, dismiss }) {
             />
           )}
         </div>
-        <div className="p-4 text-center">
+        <div className="text-lg p-4 text-center">
           <p>Please connect to your wallet.</p>
         </div>
       </div>

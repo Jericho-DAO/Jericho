@@ -35,12 +35,12 @@ export default function App() {
 	}
 	
 	// This method just clears part of the state.
-	const _dismissNetworkError = () => {
-	setNetworkError(undefined);
+	const dismissNetworkError = () => {
+		setNetworkError(undefined);
 	}
 
 	if (ethereum === undefined) {
-	return <NoWalletDetected />;
+		return <NoWalletDetected />;
 	}
 
 	const connectWallet = () => {
@@ -59,7 +59,7 @@ export default function App() {
 	const HomePage = () => {
 		
 		if (account === undefined) {
-			return <ConnectWallet networkError={networkError} dismiss={() => _dismissNetworkError()}/>
+			return <ConnectWallet networkError={networkError} dismiss={() => dismissNetworkError()}/>
 		}
 
 		return (
@@ -67,21 +67,11 @@ export default function App() {
 				<div className="flex flex-col items-center">
 					<img src={logo} className="w-52 h-52" alt="logo" />
 					<div className="text-center">
-						<h1 className="text-5xl">The Forge</h1>
-						<p className="mt-2">
-						A place where crypto entrepreneurs learn, meet and buidl together.
+						<h1 className="text-7xl mt-4">The Forge</h1>
+						<p className="text-lg mt-6">
+							A place where crypto entrepreneurs learn, meet and buidl together.
 						</p>
-
-						{/* Metamask network should be set to Localhost:8545. */}
-						{networkError && (
-						<NetworkErrorMessage 
-								message={networkError} 
-								dismiss={() => _dismissNetworkError()} 
-						/>
-						)}
-					</div>
-					<div className="p-4 text-center">
-						<p>You have X and Y hammer</p>
+						<p className="text-lg p-4 text-center">You have X and Y hammer</p>
 					</div>
 				</div>
 			</div>
@@ -108,8 +98,8 @@ export default function App() {
 					path="/"
 					element={<HomePage/>}
 				/>
-				<Route path="summon" element={<Summon props={ { account, hasAnvil, hasInvite, theForgeSC, networkError, _dismissNetworkError } }/>} />
-				<Route path="register" element={<TheRegister props={ { hasHammer, account, networkError, _dismissNetworkError } }/>} />
+				<Route path="summon" element={<Summon props={ { account, hasAnvil, hasInvite, theForgeSC, networkError, dismissNetworkError } }/>} />
+				<Route path="register" element={<TheRegister props={ { hasHammer, account, networkError, dismissNetworkError } }/>} />
 				<Route
 					path="*"
 					element={
