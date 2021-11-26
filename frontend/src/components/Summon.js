@@ -1,5 +1,5 @@
 import React from "react";
-import { ConnectWallet } from "./presentationals/ConnectWallet.js";
+import { HomePage } from "./presentationals/HomePage.js";
 
 // Components with logic
 import MintingHammer from './MintingHammer.js';
@@ -30,7 +30,11 @@ const Summon = (state) => {
   }
 
   if (account === undefined) {
-    return <ConnectWallet networkError={networkError} dismiss={() => dismissNetworkError()}/>
+    return <HomePage
+						 networkError={networkError}
+						 dismiss={() => dismissNetworkError()}
+             account={account}
+					 />
   }
   
   return (

@@ -9,7 +9,7 @@ import logo from "./images/Logo.png";
 import { NetworkErrorMessage } from './components/presentationals/NetworkErrorMessage';
 import { NoWalletDetected } from './components/presentationals/NoWalletDetected';
 import TheRegister from './components/TheRegister';
-import { ConnectWallet } from './components/presentationals/ConnectWallet';
+import { HomePage } from './components/presentationals/HomePage';
 
 export default function App() {
 
@@ -56,28 +56,6 @@ export default function App() {
 		})
 	}
 
-	const HomePage = () => {
-		
-		if (account === undefined) {
-			return <ConnectWallet networkError={networkError} dismiss={() => dismissNetworkError()}/>
-		}
-
-		return (
-			<div>
-				<div className="flex flex-col items-center">
-					<img src={logo} className="w-52 h-52" alt="logo" />
-					<div className="text-center">
-						<h1 className="text-7xl mt-4">The Forge</h1>
-						<p className="text-lg mt-6">
-							A place where crypto entrepreneurs learn, meet and buidl together.
-						</p>
-						<p className="text-lg p-4 text-center">You have X and Y hammer</p>
-					</div>
-				</div>
-			</div>
-		)
-	}
-
 	const Layout = () => {
 		return (
 			<div className="bg-black text-white h-screen">
@@ -96,7 +74,13 @@ export default function App() {
 			<Route  element={<Layout />}>
 				<Route 
 					path="/"
-					element={<HomePage/>}
+					element={
+						<HomePage
+							networkError={networkError}
+							dismiss={() => dismissNetworkError()}
+							account={account}
+						/>
+					}
 				/>
 				<Route path="summon" element={<Summon props={ { account, hasAnvil, hasInvite, theForgeSC, networkError, dismissNetworkError } }/>} />
 				<Route path="register" element={<TheRegister props={ { hasHammer, account, networkError, dismissNetworkError } }/>} />

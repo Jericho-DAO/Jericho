@@ -1,5 +1,5 @@
 import React from "react";
-import { ConnectWallet } from "./presentationals/ConnectWallet";
+import { HomePage } from "./presentationals/HomePage";
 
 const TheRegister = (state) => {
 
@@ -7,7 +7,11 @@ const TheRegister = (state) => {
   console.log("hammer!", hasHammer)
 
   if (account === undefined) {
-    return <ConnectWallet networkError={networkError} dismiss={() => dismissNetworkError()}/>
+    return <HomePage
+						 networkError={networkError}
+						 dismiss={() => dismissNetworkError()}
+             account={account}
+					 />
   }
 
   function displayHasHammer() {
@@ -17,7 +21,7 @@ const TheRegister = (state) => {
         <iframe 
           className=""
           src="https://airtable.com/embed/shr8SeKKTQlnJJpO4?backgroundColor=gray" 
-          frameborder="0" onmousewheel="" width="100%" height="2000" 
+          frameBorder="0" onmousewheel="" width="100%" height="2000" 
         />
       </div>
     )
