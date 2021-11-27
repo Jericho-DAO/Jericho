@@ -1,5 +1,4 @@
-import * as React from 'react';
-import { useState } from "react";
+import React, { useState } from "react"
 import { Outlet, Routes, Route } from 'react-router-dom';
 
 import Summon from './components/Summon';
@@ -11,32 +10,25 @@ import { HomePage } from './components/presentationals/HomePage';
 
 export default function App() {
 
-	const { ethereum } = window;
 	const [ account, setAccount ] = useState(undefined);
 	const [ hasHammer, setHasHammer ] = useState(false);
 	const [ theForgeSC, setTheForgeSC ] = useState(false);
 	const [ hasAnvil, setHasAnvil ] = useState(false);
 	const [ hasInvite, setHasInvite ] = useState(false);
 	const [ networkError, setNetworkError ] = useState(undefined);
-	// const [ txBeingSent, setTxBeingSent ] = useState(undefined)
-	// const [ transactionError, setTransactionError ] = useState(undefined);
+	const [ txBeingSent, setTxBeingSent ] = useState(undefined)
+  const [ txSuccess, setTxSuccess ] = useState(undefined);
 
 	const resetState = () => {
 		setAccount(undefined)
-		// setTxBeingSent(undefined)
-		// setTransactionError(undefined)
+		setTxBeingSent(undefined)
 		setNetworkError(undefined)
 		setHasHammer(false)
 		setHasAnvil(false)
 		setHasInvite(false)
 	}
 	
-	// This method just clears part of the state.
-	const dismissNetworkError = () => {
-		setNetworkError(undefined);
-	}
-
-	if (ethereum === undefined) {
+	if (window.ethereum === undefined) {
 		return <NoWalletDetected />;
 	}
 
@@ -68,18 +60,43 @@ export default function App() {
 	return (
 		<Routes>
 			<Route  element={<Layout />}>
+
 				<Route 
 					path="/"
 					element={
 						<HomePage
 							networkError={networkError}
-							dismiss={() => dismissNetworkError()}
+							dismiss={() => setNetworkError(undefined)}
 							account={account}
 						/>
 					}
 				/>
-				<Route path="summon" element={<Summon props={ { account, hasAnvil, hasInvite, theForgeSC, networkError, dismissNetworkError } }/>} />
-				<Route path="register" element={<TheRegister props={ { hasHammer, account, networkError, dismissNetworkError } }/>} />
+
+				<Route
+					path="summon"
+					element={
+						<Summon props={{
+							account,
+							hasAnvil,
+							hasInvite,
+							theForgeSC,
+							networkError,
+							setNetworkError,
+							txBeingSent,
+							setTxBeingSent,
+							txSuccess,
+							setTxSuccess
+						}}/>
+					}
+				/>
+
+				<Route 
+					path="register"
+					element={
+						<TheRegister props={{ hasHammer, account, networkError, setNetworkError }}/>
+					}
+				/>
+
 				<Route
 					path="*"
 					element={

@@ -1,16 +1,11 @@
 import React, { useState, Fragment } from "react"
 import { Transition } from '@headlessui/react'
-import { CheckCircleIcon, ExclamationIcon } from '@heroicons/react/outline'
+import { ExclamationIcon } from '@heroicons/react/outline'
 import { XIcon } from '@heroicons/react/solid'
 
-export function NetworkErrorMessage({ message, dismiss, isTxSuccess }) {
+export function WaitingForTransactionMessage({ message, dismiss }) {
 
   const [show, setShow] = useState(true)
-
-  let title = isTxSuccess ? "Successfull Transaction" : "Error"
-  const Icon = isTxSuccess ? CheckCircleIcon : ExclamationIcon
-
-  // const tmp = "Mined, see transaction: https://rinkeby.etherscan.io/tx/"
 
   return (
     <>
@@ -35,27 +30,13 @@ export function NetworkErrorMessage({ message, dismiss, isTxSuccess }) {
               <div className="py-2 px-4">
                 <div className="flex items-start">
                   <div className="flex-shrink-0 pt-1">
-                    <Icon
-                      className={isTxSuccess ? "h-6 w-6 text-green-400" : "h-6 w-6 text-red-400"}
-                      aria-hidden="true"
-                    />
+                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900 m-auto"></div>
                   </div>
                   <div className="ml-3 w-0 flex-auto pt-0.5">
-                    <p className="font-medium text-gray-900">{title}</p>
-                    <p className="text-sm text-gray-500">{message}</p>
-                  </div>
-                  <div className="ml-4 flex-shrink-0 flex">
-                    <button
-                      className="bg-white rounded-md inline-flex text-gray-400 hover:text-gray-500
-                                focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                      onClick={() => {
-                        setShow(false)
-                        dismiss()
-                      }}
-                    >
-                      <span className="sr-only">Close</span>
-                      <XIcon className="h-5 w-5" aria-hidden="true" />
-                    </button>
+                    <p className="font-medium text-gray-900">Transaction sent</p>
+                    <p className="text-sm text-gray-500">
+                      Waiting for transaction to be mined
+                    </p>
                   </div>
                 </div>
               </div>
@@ -65,5 +46,4 @@ export function NetworkErrorMessage({ message, dismiss, isTxSuccess }) {
       </div>
     </>
   )
-
 }

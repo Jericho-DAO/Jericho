@@ -9,7 +9,6 @@ const CONTRACT_ADDRESS_ANVIL = "0x619f82bf98423cd8BD31B5Cd26BeCBA095EC2b43";
 const HARDHAT_ID = '1337';
 const RINKEBY_ID = '4';
 
-
 const initialize = async (stateManagement) => {
   const { setAccount, setNetworkError, resetState } = stateManagement;
 
@@ -19,7 +18,7 @@ const initialize = async (stateManagement) => {
 
     console.log("selectedAddress", selectedAddress)
     if (window.ethereum.networkVersion !== HARDHAT_ID && window.ethereum.networkVersion !== RINKEBY_ID) {
-      setNetworkError("Please connect Metamask to LocalHost:8545 or Rinkeby")
+      setNetworkError("Please connect Metamask to Polygon network")
 
       return;
     }

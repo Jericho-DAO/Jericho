@@ -3,13 +3,13 @@ import { HomePage } from "./presentationals/HomePage";
 
 const TheRegister = (state) => {
 
-  const { hasHammer, account, networkError, dismissNetworkError } = state.props;
+  const { hasHammer, account, networkError, setNetworkError } = state.props;
   console.log("hammer!", hasHammer)
 
   if (account === undefined) {
     return <HomePage
 						 networkError={networkError}
-						 dismiss={() => dismissNetworkError()}
+						 dismiss={() => setNetworkError(undefined)}
              account={account}
 					 />
   }

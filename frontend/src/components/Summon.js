@@ -7,13 +7,12 @@ import MintingHammer from './MintingHammer.js';
 
 const Summon = (state) => {
 
-  const { account, hasAnvil, hasInvite, theForgeSC, networkError, dismissNetworkError } = state.props;
-  console.log("test", account, hasAnvil, hasInvite);
+  const { account, hasAnvil, networkError, setNetworkError } = state.props;
 
   function displayHasAnvil() {
     return (
       <div className="mt-6 text-center">
-        <MintingHammer props={{ hasInvite, theForgeSC }}/>
+        <MintingHammer props={state.props}/>
       </div>
     )
   }
@@ -32,7 +31,7 @@ const Summon = (state) => {
   if (account === undefined) {
     return <HomePage
 						 networkError={networkError}
-						 dismiss={() => dismissNetworkError()}
+						 dismiss={() => setNetworkError(undefined)}
              account={account}
 					 />
   }
