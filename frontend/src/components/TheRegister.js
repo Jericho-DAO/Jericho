@@ -1,5 +1,6 @@
 import React from "react";
 import { HomePage } from "./presentationals/HomePage";
+import Hammer_emoji from "../images/Hammer_emoji.png";
 
 const TheRegister = (state) => {
 
@@ -39,11 +40,16 @@ const TheRegister = (state) => {
   }
 
   return (
-    <div className="flex flex-col items-center">
-      <div className="flex-shrink w-11/12 sm:w-3/5 h-auto">
-        <p className="text-6xl bold my-8 text-center">The Register</p>
+    <div className="flex flex-row">
+      <div className="flex-grow w-16"></div>
+      <div class="flex-shrink w-4/5 h-auto">
+        <div className="flex flex-row sm:flex-col items-center justify-center mb-8 mt-10 sm:mt-2 space-x-4">
+          <img src={Hammer_emoji} className="w-14 h-14 sm:w-16 sm:h-16 lg:w-24 lg:h-24 sm:mr-4" alt="hammer" />
+          <p className="text-3xl sm:text-4xl lg:text-6xl bold">The Forge summon</p>
+        </div>
         { hasHammer ? displayHasHammer() : displayNoHammer() }
       </div>
+      <div className="flex-grow w-16"></div>
     </div>
   );
 }

@@ -81,7 +81,7 @@ export function NavBar({ connectWallet, account }) {
               {/* Connect Wallet */}
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 <button
-                  className="inline-flex justify-center py-2 px-4 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700"
+                  className="inline-flex justify-center py-2 px-4 font-medium rounded-md text-black bg-white hover:bg-gray-400"
                   type="button"
                   onClick={connectWallet}
                 >

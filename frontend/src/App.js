@@ -7,6 +7,7 @@ import initialize from './components/Initialize.js';
 import { NoWalletDetected } from './components/presentationals/NoWalletDetected';
 import TheRegister from './components/TheRegister';
 import { HomePage } from './components/presentationals/HomePage';
+import { hashMessage } from '@ethersproject/hash';
 
 export default function App() {
 
@@ -68,6 +69,9 @@ export default function App() {
 							networkError={networkError}
 							dismiss={() => setNetworkError(undefined)}
 							account={account}
+							hasHammer={hasHammer}
+							hasAnvil={hasAnvil}
+							hasInvite={hasInvite}
 						/>
 					}
 				/>
@@ -76,16 +80,8 @@ export default function App() {
 					path="summon"
 					element={
 						<Summon props={{
-							account,
-							hasAnvil,
-							hasInvite,
-							theForgeSC,
-							networkError,
-							setNetworkError,
-							txBeingSent,
-							setTxBeingSent,
-							txSuccess,
-							setTxSuccess
+							account, hasAnvil, hasInvite, theForgeSC, networkError, setNetworkError, 
+							txBeingSent, setTxBeingSent, txSuccess, setTxSuccess
 						}}/>
 					}
 				/>

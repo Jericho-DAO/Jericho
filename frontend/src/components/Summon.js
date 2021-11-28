@@ -1,5 +1,6 @@
 import React from "react";
 import { HomePage } from "./presentationals/HomePage.js";
+import anvil_emoji from "../images/anvil_emoji.png";
 
 // Components with logic
 import MintingHammer from './MintingHammer.js';
@@ -37,8 +38,11 @@ const Summon = (state) => {
   }
   
   return (
-    <div className="flex flex-col items-center pt-10">
-      <p className="text-2xl md:text-4xl lg:text-6xl bold mb-5 ">The Forge summon</p>
+    <div className="flex flex-col items-center">
+      <div className="flex flex-row sm:flex-col items-center mb-8 mt-10 sm:mt-2 space-x-4">
+        <img src={anvil_emoji} className="w-14 h-14 sm:w-16 sm:h-16 lg:w-24 lg:h-24 sm:mr-4" alt="anvil" />
+        <p className="text-3xl sm:text-4xl lg:text-6xl bold">The Forge summon</p>
+      </div>
       <p className="text-2xl md:text-3xl semibold mb-4 md:mb-10">The rules</p>
         <div className="flex-shrink w-auto h-auto px-6">
           Anvil ownership unlocks 3 summons per blacksmith:
