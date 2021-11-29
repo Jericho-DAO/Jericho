@@ -4,6 +4,7 @@ import anvil_emoji from "../images/anvil_emoji.png";
 
 // Components with logic
 import MintingHammer from './MintingHammer.js';
+import { NavLink } from "react-router-dom";
 
 
 const Summon = (state) => {
@@ -39,22 +40,19 @@ const Summon = (state) => {
   
   return (
     <div className="flex flex-col items-center">
-      <div className="flex flex-row sm:flex-col items-center my-6 sm:mt-0 space-x-4">
+      <div className="flex flex-row sm:flex-col items-center my-6 sm:mt-0 mb-14 space-x-4">
         <img src={anvil_emoji} className="w-14 h-14 sm:w-16 sm:h-16 lg:w-24 lg:h-24 sm:mr-4" alt="anvil" />
-        <p className="text-3xl sm:text-4xl lg:text-6xl bold">The Forge summons</p>
+        <p className="text-3xl sm:text-4xl lg:text-6xl bold">The Summoning</p>
       </div>
-      <p className="text-2xl md:text-3xl semibold mb-4">The rules</p>
-        <div className="flex-shrink w-auto h-auto px-6">
-          Anvil ownership unlocks 3 summons per blacksmith:
+        <div className="flex-shrink mb-4 w-auto h-auto px-6">
+          Anvil ownership unlocks 1 summon per buidler:
           <ul className="ml-10 mt-5 list-disc list-outside">
             <div className="mb-1">
-              <li>Choose wisely who you summon to The Forge.</li>
-              <li>The summoned person will receive a hammer NFT.</li>
-              <li>This hammer NFT opens an application form to join The Forge. It doesn’t grant access to The Forge.</li>
-              <li>Our knights review the application.</li>
-              <li>If the application is accepted, the person joins The Forge as an apprentice.</li> 
-              <li>Successful apprenticeship unlocks anvil ownership.</li>
-              <li>If the application isn’t accepted, the person can sell the hammer NFT on the secondary market.</li>
+              <li>Invites are Hammer NFTs minted on Polygon.</li>
+              <li>The Hammer doesn't give access to The Forge. It's a pass <NavLink to="/register" className="underline"> to apply</NavLink></li>
+              <li>Our knights review every application.</li>
+              <li>Accepted members join as apprentices. After accomplishing simple quests, they get lifetime access in the form of an Anvil NFT.</li>
+              <li>Declined applicants can transfer their Hammers to friends or sell them on OpenSea.</li> 
             </div>
           </ul>
         </div>
