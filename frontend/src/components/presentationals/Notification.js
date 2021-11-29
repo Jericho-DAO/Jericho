@@ -3,14 +3,14 @@ import { Transition } from '@headlessui/react'
 import { CheckCircleIcon, ExclamationIcon } from '@heroicons/react/outline'
 import { XIcon } from '@heroicons/react/solid'
 
-export function NetworkErrorMessage({ message, dismiss, isTxSuccess }) {
+export function Notification({ message, dismiss, isTxSuccess }) {
 
   const [show, setShow] = useState(true)
 
   let title = isTxSuccess ? "Successfull Transaction" : "Error"
   const Icon = isTxSuccess ? CheckCircleIcon : ExclamationIcon
 
-  // const tmp = "Mined, see transaction: https://rinkeby.etherscan.io/tx/"
+  // console.log(`Mined, see transaction: https://rinkeby.etherscan.io/tx/${tx.hash}`);
 
   return (
     <>

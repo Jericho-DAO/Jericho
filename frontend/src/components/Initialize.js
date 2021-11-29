@@ -3,8 +3,8 @@ import { ethers } from "ethers";
 import TheForge from "../contracts/TheForge.json";
 import Anvil from "../contracts/AnvilTheForge.json";
 
-const CONTRACT_ADDRESS_THEFORGE = "0xE5868B98E594510788F469ec5ca0440FCAb05873";
-const CONTRACT_ADDRESS_ANVIL = "0x619f82bf98423cd8BD31B5Cd26BeCBA095EC2b43";
+const CONTRACT_ADDRESS_THEFORGE = "0x358d5120491daBc7F5f7A7AA812CE2d19eE65BD5";
+const CONTRACT_ADDRESS_ANVIL = "0x4d6012B71514dD0E3b0AA77B6a107Aee53E895A2";
 
 const HARDHAT_ID = '1337';
 const RINKEBY_ID = '4';

@@ -39,11 +39,11 @@ const Summon = (state) => {
   
   return (
     <div className="flex flex-col items-center">
-      <div className="flex flex-row sm:flex-col items-center mb-8 mt-10 sm:mt-2 space-x-4">
+      <div className="flex flex-row sm:flex-col items-center my-6 sm:mt-0 space-x-4">
         <img src={anvil_emoji} className="w-14 h-14 sm:w-16 sm:h-16 lg:w-24 lg:h-24 sm:mr-4" alt="anvil" />
-        <p className="text-3xl sm:text-4xl lg:text-6xl bold">The Forge summon</p>
+        <p className="text-3xl sm:text-4xl lg:text-6xl bold">The Forge summons</p>
       </div>
-      <p className="text-2xl md:text-3xl semibold mb-4 md:mb-10">The rules</p>
+      <p className="text-2xl md:text-3xl semibold mb-4">The rules</p>
         <div className="flex-shrink w-auto h-auto px-6">
           Anvil ownership unlocks 3 summons per blacksmith:
           <ul className="ml-10 mt-5 list-disc list-outside">

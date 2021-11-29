@@ -5,8 +5,8 @@ import { NavLink } from "react-router-dom";
 import logo from "../../images/Logo.png";
 
 const navigation = [
-  { name: 'Summon', href: 'summon', current: true },
-  { name: 'Register', href: 'register', current: false },
+  { name: 'Summon', to: 'summon' },
+  { name: 'Register', to: 'register' },
 ]
 
 function classNames(...classes) {
@@ -55,7 +55,7 @@ export function NavBar({ connectWallet, account }) {
                     {navigation.map((item) => (
                       <NavLink
                         key={item.name}
-                        to={item.href}
+                        to={item.to}
                         className={item => {
                           const base = 'px-3 py-2 rounded-md text-lg font-medium '
                           const style = item.isActive ? 'bg-gray-900 text-white ' : 'text-gray-300 hover:bg-gray-700 hover:text-white'
@@ -73,7 +73,7 @@ export function NavBar({ connectWallet, account }) {
               {/* Connect Wallet */}
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 <button
-                  className="inline-flex justify-center py-2 px-4 font-medium rounded-md text-black bg-white hover:bg-gray-400"
+                  className="inline-flex justify-center py-2 px-2 sm:px-4 text-xs sm:text-base font-medium rounded-md text-black bg-white hover:bg-gray-400"
                   type="button"
                   onClick={connectWallet}
                 >
@@ -89,15 +89,14 @@ export function NavBar({ connectWallet, account }) {
               {navigation.map((item) => (
                 <Disclosure.Button
                   key={item.name}
-                  as="a"
-                  href={item.href}
-                  className={classNames(
-                    item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                    'block px-3 py-2 rounded-md text-base font-medium'
-                  )}
-                  aria-current={item.current ? 'page' : undefined}
+                  className={"block px-3 py-2 rounded-md text-base font-medium text-white"}
                 >
-                  {item.name}
+                  <NavLink
+                    to={item.to}
+                    className={item => item.isActive ? 'underline' : 'text-gray-300 hover:bg-gray-700 hover:text-white'}
+                  >
+                    {item.name}
+                  </NavLink>
                 </Disclosure.Button>
               ))}
             </div>

@@ -1,6 +1,6 @@
 import { ethers } from "ethers";
 import React, { useState } from "react"
-import { NetworkErrorMessage } from "./presentationals/NetworkErrorMessage";
+import { Notification } from "./presentationals/Notification";
 import { WaitingForTransactionMessage } from "./presentationals/WaitingForTransactionMessage";
 
 const ERROR_CODE_TX_REJECTED_BY_USER = 4001;
@@ -23,8 +23,7 @@ const MintingHammer = (state) => {
     const validAddress = ethers.utils.isAddress(addressInvitee);
 
     if(validAddress === false) {
-      setNetworkError("Enter a valid address");
-      return;
+      return setNetworkError("Enter a valid address");
     }
 
     try {
@@ -34,16 +33,12 @@ const MintingHammer = (state) => {
 
       setTxBeingSent(tx.hash);
 
-      console.log("Mining...please wait.")
-
       const receipt = await tx.wait();
 
       // The receipt, contains a status flag, which is 0 to indicate an error.
       if (receipt.status === 0) {
         throw new Error("Transaction failed");
       }
-
-      console.log(`Mined, see transaction: https://rinkeby.etherscan.io/tx/${tx.hash}`);
 
       setTxSuccess(tx.hash);
     } catch (error) {
@@ -62,6 +57,7 @@ const MintingHammer = (state) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
     if (hasInvite > 0 ) {
       mintHammer();
     } else {
@@ -102,7 +98,7 @@ const MintingHammer = (state) => {
         )}
 
         {(networkError || txSuccess) && (
-          <NetworkErrorMessage
+          <Notification
             message={networkError || txSuccess}
             dismiss={() => {
               if (networkError) setNetworkError(undefined)

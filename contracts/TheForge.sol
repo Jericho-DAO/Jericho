@@ -22,7 +22,7 @@ contract TheForge is
     mapping(address => uint) private invitation;
 
     constructor()
-        ERC1155("ipfs://QmWoaBpmunVsVMqVXBos62f2YTTTV4V9EE2cfvVaL3aNRR")
+        ERC1155("ar://XvHHMaqH3obdwpMSPA7lyXsblLgHXRKofGyCPKdyaO0")
     {
         _setupRole(DEFAULT_ADMIN_ROLE, msg.sender);
         _setupRole(URI_SETTER_ROLE, msg.sender);

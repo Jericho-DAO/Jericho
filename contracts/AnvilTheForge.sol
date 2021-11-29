@@ -25,7 +25,7 @@ contract AnvilTheForge is
     bytes32 public constant BURNER_ROLE = keccak256("BURNER_ROLE");
     Counters.Counter private _tokenIdCounter;
 
-    string internal URI = "https://gateway.pinata.cloud/ipfs/QmWoaBpmunVsVMqVXBos62f2YTTTV4V9EE2cfvVaL3aNRR";
+    string internal URI = "ar://mjmZl24IPQWDCkAPOxfezdvmBf3Jo5v5oT_xhFCnI-0";
 
     constructor() ERC721("AnvilTheForge", "ATF") {
         _setupRole(DEFAULT_ADMIN_ROLE, msg.sender);
