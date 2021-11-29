@@ -16,7 +16,6 @@ const initialize = async (stateManagement) => {
 
     const [selectedAddress] = await window.ethereum.enable();
 
-    console.log("selectedAddress", selectedAddress)
     if (window.ethereum.networkVersion !== HARDHAT_ID && window.ethereum.networkVersion !== RINKEBY_ID) {
       setNetworkError("Please connect Metamask to Polygon network")
 
@@ -68,16 +67,13 @@ const _intializeEthers = async (selectedAddress, stateManagement) => {
     const signer = provider.getSigner();
     const theForgeContract = new ethers.Contract(CONTRACT_ADDRESS_THEFORGE, TheForge.abi, signer);
     const anvilContract = new ethers.Contract(CONTRACT_ADDRESS_ANVIL, Anvil.abi, signer);
-    console.log(selectedAddress)
+
     const balanceHammer = await theForgeContract.balanceOf(selectedAddress, 0);
     const balanceAnvil = await anvilContract.balanceOf(selectedAddress);
     const balanceInvite = await theForgeContract.hasInvite(selectedAddress);
 
     setTheForgeSC(theForgeContract);
     setHasInvite(balanceInvite);
-
-    console.log("balance for anvil ", balanceAnvil, balanceAnvil > 0);
-    console.log("invitebalance", balanceInvite>0);
 
     if (balanceHammer > 0) setHasHammer(true);
 

@@ -71,9 +71,9 @@ const MintingHammer = (state) => {
 
   return (
     <div className="bg-white rounded-lg">
-      <div className="px-4 sm:px-8 py-4">
+      <div className="px-4 sm:px-8 py-3">
         <h3 className="text-lg sm:text-xl px-10 sm:px-16 md:px-24 lg:px-36 leading-6 font-medium text-black">Who will you summon?</h3>
-        <form className="mt-5 sm:items-center">
+        <form className="mt-3 sm:items-center">
           <div className="w-full sm:max-w-lg">
             <label htmlFor="email" className="sr-only">
               Ethereum address
@@ -89,7 +89,7 @@ const MintingHammer = (state) => {
           </div>
           <button
             type="submit"
-            className="mt-6 inline-flex items-center justify-center px-6 py-2 border border-gray-500 shadow-sm font-medium rounded-md text-black bg-white hover:bg-gray-300 sw-auto sm:text-sm"
+            className="mt-4 inline-flex items-center justify-center px-6 py-1 sm:py-2 border border-gray-500 shadow-sm font-medium rounded-md text-black bg-white hover:bg-gray-300 sw-auto sm:text-sm"
             onClick={handleSubmit}
           >
             Summon
@@ -115,54 +115,5 @@ const MintingHammer = (state) => {
     </div>
   )
 }
-    // <div className="flex flex-row">
-    //   <div className="flex-shrink w-full h-auto">
-    //     <form className="flex flex-col items-center">
-    //       <div className="bg-white rounded w-full px-5 pt-6 pb-8 mb-4">
-    //         <label
-    //           className="block text-gray-700 text-lg font-bold mb-2"
-    //           htmlFor="invitation"
-    //         >
-    //           Who will you summon?
-    //         </label>
-    //         <input
-    //           className="bg-white focus:outline-none focus:shadow-outline border border-gray-300
-    //                     text-black rounded-lg  py-2 px-4 flex w-full appearance-none leading-normal"
-    //           type="string"
-    //           id="invitation"
-    //           onChange={(e) => setAddressInvitee(e.target.value)}
-    //           value={addressInvitee}
-    //           placeholder="Insert wallet address..."
-    //         />
-    //       </div>
-
-    //       <button
-    //         className="bg-white hover:bg-gray-400 box-border h-16 text-black text-base w-auto px-8 font-bold rounded"
-    //         onClick={handleSubmit}
-    //       >
-    //         Summon
-    //       </button>
-    //     </form>
-
-    //     {txBeingSent && (
-    //       <WaitingForTransactionMessage
-    //         message={txBeingSent}
-    //       />
-    //     )}
-
-    //     {(networkError || txSuccess) && (
-    //       <NetworkErrorMessage
-    //         message={networkError || txSuccess}
-    //         dismiss={() => {
-    //           if (networkError) setNetworkError(undefined)
-    //           else setTxSuccess(undefined)
-    //         }}
-    //         isTxSuccess={txSuccess}
-    //       />
-    //     )}
-
-    //   </div>
-    // </div>
-
-
+ 
 export default MintingHammer;

@@ -8,14 +8,6 @@ const navigation = [
   { name: 'Summon', href: 'summon', current: true },
   { name: 'Register', href: 'register', current: false },
 ]
-                        // className={isActive => ({
-                        //   isActive ? 'bg-gray-900 text-white px-3 py-2 rounded-md font-medium' : 'text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md font-medium'
-                        // })}
-
-                        // className={classNames(
-                        //   item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                        //   'px-3 py-2 rounded-md font-medium'
-                        // )}
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')

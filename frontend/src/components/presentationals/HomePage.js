@@ -15,9 +15,8 @@ export function HomePage({ networkError, dismiss, account, hasInvite, hasHammer,
         return (
           <NavLink to="/summon">
             <button
-            type="button"
-            className="inline-flex items-center px-4 py-2 mt-6 border border-transparent text-lg font-medium rounded-md shadow-sm text-black bg-white hover:bg-gray-300"
-            onClick=""
+              type="button"
+              className="inline-flex items-center px-4 py-2 mt-6 border border-transparent text-lg font-medium rounded-md shadow-sm text-black bg-white hover:bg-gray-300"
             >
               <img src={anvil_emoji} className="w-0 h-0 sm:w-8 sm:h-8 sm:mr-4" alt="anvil" />
               Summon
