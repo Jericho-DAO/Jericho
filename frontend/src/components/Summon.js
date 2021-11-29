@@ -8,7 +8,7 @@ import MintingHammer from './MintingHammer.js';
 
 const Summon = (state) => {
 
-  const { account, hasAnvil, networkError, setNetworkError } = state.props;
+  const { account, hasAnvil, networkError, setNetworkError, hasInvite } = state.props;
 
   function displayHasAnvil() {
     return (

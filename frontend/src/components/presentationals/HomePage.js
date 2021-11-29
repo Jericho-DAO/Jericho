@@ -38,22 +38,14 @@ function RegisterButton() {
 export function HomePage({ networkError, dismiss, account, hasInvite, hasHammer, hasAnvil }) {
 
   function displayConnected() {
- 
-    let numberInvite = 0;
-      
-    if (hasInvite._hex !== undefined ) {
-      const bigNumInstance = ethers.BigNumber.from(hasInvite);
-      numberInvite = bigNumInstance.toNumber();
-    }
      
     if (hasAnvil || hasHammer) {
       return (
         <div className="text-lg p-4 text-center">
           <div className="mt-10 md:mt-1 p-2 px-6 rounded text-center text-white ">
             <p>You are the proud owner of {hasAnvil ? "an Anvil " : "" } {(hasAnvil && hasHammer) ? "and " : ""} {hasHammer ? "a Hammer" : ""}</p>
-            <div>
-              You have {numberInvite} invitation{numberInvite > 1 ? "s" : ""} left 
-            </div>
+            {hasAnvil ? (<div>You have {hasInvite} invitation{hasInvite > 1 ? "s" : ""} left </div>) : ""}
+            
 
             { hasAnvil ? SummonButton() : RegisterButton()}
 

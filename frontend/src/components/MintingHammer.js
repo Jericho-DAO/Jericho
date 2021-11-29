@@ -69,6 +69,9 @@ const MintingHammer = (state) => {
     <div className="bg-white rounded-lg">
       <div className="px-4 sm:px-8 py-3">
         <h3 className="text-lg sm:text-xl px-10 sm:px-16 md:px-24 lg:px-36 leading-6 font-medium text-black">Who will you summon?</h3>
+        <div className="text-gray-600 text-base md:text-lg mt-2">
+            { hasInvite >= 0 && `${hasInvite} invitation${hasInvite > 1 ? "s" : ""} left`}
+        </div>
         <form className="mt-3 sm:items-center">
           <div className="w-full sm:max-w-lg">
             <label htmlFor="email" className="sr-only">

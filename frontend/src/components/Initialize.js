@@ -72,8 +72,15 @@ const _intializeEthers = async (selectedAddress, stateManagement) => {
     const balanceAnvil = await anvilContract.balanceOf(selectedAddress);
     const balanceInvite = await theForgeContract.hasInvite(selectedAddress);
 
+    let numberInvite = 0;
+      
+    if (balanceInvite._hex !== undefined ) {
+      const bigNumInstance = ethers.BigNumber.from(balanceInvite);
+      numberInvite = bigNumInstance.toNumber();
+    }
+
     setTheForgeSC(theForgeContract);
-    setHasInvite(balanceInvite);
+    setHasInvite(numberInvite);
 
     if (balanceHammer > 0) setHasHammer(true);
 
