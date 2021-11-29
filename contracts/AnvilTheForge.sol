@@ -8,7 +8,16 @@ import "@openzeppelin/contracts/access/AccessControl.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Burnable.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 
-contract AnvilTheForge is ERC721, ERC721URIStorage, Pausable, AccessControl, ERC721Burnable {
+import './ERC2981ContractWideRoyalties.sol';
+
+contract AnvilTheForge is
+    ERC721,
+    ERC721URIStorage,
+    ERC2981ContractWideRoyalties,
+    Pausable,
+    AccessControl,
+    ERC721Burnable
+{
     using Counters for Counters.Counter;
 
     bytes32 public constant PAUSER_ROLE = keccak256("PAUSER_ROLE");
@@ -39,6 +48,13 @@ contract AnvilTheForge is ERC721, ERC721URIStorage, Pausable, AccessControl, ERC
         for(uint256 i = 0; i < _tokenIdCounter.current(); i++) {
             _setTokenURI(i, uri);
         }
+    }
+
+    // @notice Allows to set the royalties on the contract
+    // @param recipient the royalties recipient
+    // @param value royalties value (between 0 and 10000)
+    function setRoyalties(address recipient, uint256 value) public onlyRole(DEFAULT_ADMIN_ROLE) {
+        _setRoyalties(recipient, value);
     }
 
     function safeMint(address to) public onlyRole(MINTER_ROLE) {
@@ -78,7 +94,7 @@ contract AnvilTheForge is ERC721, ERC721URIStorage, Pausable, AccessControl, ERC
     function supportsInterface(bytes4 interfaceId)
         public
         view
-        override(ERC721, AccessControl)
+        override(ERC721, ERC2981ContractWideRoyalties, AccessControl)
         returns (bool)
     {
         return super.supportsInterface(interfaceId);

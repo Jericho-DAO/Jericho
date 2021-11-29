@@ -6,7 +6,15 @@ import "@openzeppelin/contracts/access/AccessControl.sol";
 import "@openzeppelin/contracts/security/Pausable.sol";
 import "@openzeppelin/contracts/token/ERC1155/extensions/ERC1155Burnable.sol";
 
-contract TheForge is ERC1155, AccessControl, Pausable, ERC1155Burnable {
+import './ERC2981ContractWideRoyalties.sol';
+
+contract TheForge is
+    ERC1155,
+    ERC2981ContractWideRoyalties,
+    AccessControl,
+    Pausable,
+    ERC1155Burnable
+{
     bytes32 public constant URI_SETTER_ROLE = keccak256("URI_SETTER_ROLE");
     bytes32 public constant PAUSER_ROLE = keccak256("PAUSER_ROLE");
     bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
@@ -34,10 +42,16 @@ contract TheForge is ERC1155, AccessControl, Pausable, ERC1155Burnable {
         _unpause();
     }
     
+    // @notice Allows to set the royalties on the contract
+    // @param recipient the royalties recipient
+    // @param value royalties value (between 0 and 10000)
+    function setRoyalties(address recipient, uint256 value) public onlyRole(DEFAULT_ADMIN_ROLE) {
+        _setRoyalties(recipient, value);
+    }
+    
     function hasInvite(address account) public view returns (uint) {
         return invitation[account];
     }
-    
     function addInvite(address[] memory accounts, uint256[] memory amounts)
         public
         onlyRole(MINTER_ROLE)
@@ -69,7 +83,14 @@ contract TheForge is ERC1155, AccessControl, Pausable, ERC1155Burnable {
         _mint(account, id, amount, data);
     }
 
-    function _beforeTokenTransfer(address operator, address from, address to, uint256[] memory ids, uint256[] memory amounts, bytes memory data)
+    function _beforeTokenTransfer(
+        address operator,
+        address from,
+        address to,
+        uint256[] memory ids,
+        uint256[] memory amounts,
+        bytes memory data
+    )
         internal
         whenNotPaused
         override
@@ -82,7 +103,7 @@ contract TheForge is ERC1155, AccessControl, Pausable, ERC1155Burnable {
     function supportsInterface(bytes4 interfaceId)
         public
         view
-        override(ERC1155, AccessControl)
+        override(ERC1155, ERC2981ContractWideRoyalties, AccessControl)
         returns (bool)
     {
         return super.supportsInterface(interfaceId);
