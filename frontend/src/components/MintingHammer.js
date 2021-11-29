@@ -1,7 +1,8 @@
 import { ethers } from "ethers";
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { Notification } from "./presentationals/Notification";
 import { WaitingForTransactionMessage } from "./presentationals/WaitingForTransactionMessage";
+import TheForge from "../contracts/TheForge.json";
 
 const ERROR_CODE_TX_REJECTED_BY_USER = 4001;
 
@@ -13,11 +14,47 @@ const _getRpcErrorMessage = (error) => {
   return error.message;
 }
 
+// useEffect
+
 const MintingHammer = (state) => {
     
   const [ addressInvitee, setAddressInvitee ] = useState("");
 
-  const { hasInvite, theForgeSC, networkError, setNetworkError, txBeingSent, setTxBeingSent, txSuccess, setTxSuccess } = state.props;
+  const { hasInvite, setHasInvite, theForgeSC, networkError, setNetworkError, txBeingSent, setTxBeingSent, txSuccess, setTxSuccess } = state.props;
+
+  useEffect(() => {
+    const CONTRACT_ADDRESS_THEFORGE = "0x358d5120491daBc7F5f7A7AA812CE2d19eE65BD5";
+    console.log("here", txSuccess)
+    
+    async function inviteCheck() {
+      
+      try {
+        
+        const [selectedAddress] = await window.ethereum.enable();
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const signer = provider.getSigner();
+        const theForgeContract = new ethers.Contract(CONTRACT_ADDRESS_THEFORGE, TheForge.abi, signer);
+  
+        const balanceInvite = await theForgeContract.hasInvite(selectedAddress);
+  
+        let numberInvite = 0;
+        
+        if (balanceInvite._hex !== undefined ) {
+          const bigNumInstance = ethers.BigNumber.from(balanceInvite);
+          numberInvite = bigNumInstance.toNumber();
+          console.log("here2")
+
+          if (numberInvite !== hasInvite ) {setHasInvite(numberInvite);}
+        }
+  
+      } catch(error) {
+        console.log(error);
+      }
+    }
+
+    inviteCheck();
+
+  }, [txSuccess])
 
   const mintHammer = async () => {
     const validAddress = ethers.utils.isAddress(addressInvitee);

@@ -79,7 +79,7 @@ export default function App() {
 					path="summon"
 					element={
 						<Summon props={{
-							account, hasAnvil, hasInvite, theForgeSC, networkError, setNetworkError, 
+							account, hasAnvil, hasInvite, setHasInvite, theForgeSC, networkError, setNetworkError, 
 							txBeingSent, setTxBeingSent, txSuccess, setTxSuccess
 						}}/>
 					}
