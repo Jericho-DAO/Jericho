@@ -14,8 +14,6 @@ const _getRpcErrorMessage = (error) => {
   return error.message;
 }
 
-// useEffect
-
 const MintingHammer = (state) => {
     
   const [ addressInvitee, setAddressInvitee ] = useState("");
@@ -24,7 +22,6 @@ const MintingHammer = (state) => {
 
   useEffect(() => {
     const CONTRACT_ADDRESS_THEFORGE = "0x358d5120491daBc7F5f7A7AA812CE2d19eE65BD5";
-    console.log("here", txSuccess)
     
     async function inviteCheck() {
       
@@ -42,7 +39,6 @@ const MintingHammer = (state) => {
         if (balanceInvite._hex !== undefined ) {
           const bigNumInstance = ethers.BigNumber.from(balanceInvite);
           numberInvite = bigNumInstance.toNumber();
-          console.log("here2")
 
           if (numberInvite !== hasInvite ) {setHasInvite(numberInvite);}
         }
