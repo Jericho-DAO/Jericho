@@ -8,9 +8,9 @@ import "@openzeppelin/contracts/access/AccessControl.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Burnable.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 
-import './ERC2981ContractWideRoyalties.sol';
+import "./ERC2981ContractWideRoyalties.sol";
 
-contract AnvilTheForge is
+contract TheForge_Anvil is
     ERC721,
     ERC721URIStorage,
     ERC2981ContractWideRoyalties,
@@ -27,7 +27,7 @@ contract AnvilTheForge is
 
     string internal URI = "ar://mjmZl24IPQWDCkAPOxfezdvmBf3Jo5v5oT_xhFCnI-0";
 
-    constructor() ERC721("AnvilTheForge", "ATF") {
+    constructor() ERC721("The Forge - Anvil", "TFA") {
         _setupRole(DEFAULT_ADMIN_ROLE, msg.sender);
         _setupRole(PAUSER_ROLE, msg.sender);
         _setupRole(MINTER_ROLE, msg.sender);
@@ -57,7 +57,14 @@ contract AnvilTheForge is
         _setRoyalties(recipient, value);
     }
 
-    function safeMint(address to) public onlyRole(MINTER_ROLE) {
+    function safeMintBatch(address[] memory accounts) public onlyRole(MINTER_ROLE) {
+        for(uint256 i = 0; i < accounts.length; i++) {
+            _safeMint(accounts[i]);
+        }
+    }
+
+
+    function _safeMint(address to) internal onlyRole(MINTER_ROLE) {
         uint256 tokenId = _tokenIdCounter.current();
         _tokenIdCounter.increment();
         _safeMint(to, tokenId);

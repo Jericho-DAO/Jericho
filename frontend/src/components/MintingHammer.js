@@ -21,7 +21,7 @@ const MintingHammer = (state) => {
   const { hasInvite, setHasInvite, theForgeSC, networkError, setNetworkError, txBeingSent, setTxBeingSent, txSuccess, setTxSuccess } = state.props;
 
   useEffect(() => {
-    const CONTRACT_ADDRESS_THEFORGE = "0x358d5120491daBc7F5f7A7AA812CE2d19eE65BD5";
+    const CONTRACT_ADDRESS_THEFORGE = "0xA66Dcb378A568491d3484D30BB50e90678676565";
     
     async function inviteCheck() {
       

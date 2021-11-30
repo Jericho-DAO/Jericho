@@ -3,11 +3,11 @@ import { ethers } from "ethers";
 import TheForge from "../contracts/TheForge.json";
 import Anvil from "../contracts/AnvilTheForge.json";
 
-const CONTRACT_ADDRESS_THEFORGE = "0x358d5120491daBc7F5f7A7AA812CE2d19eE65BD5";
-const CONTRACT_ADDRESS_ANVIL = "0x4d6012B71514dD0E3b0AA77B6a107Aee53E895A2";
+const CONTRACT_ADDRESS_THEFORGE = "0xA66Dcb378A568491d3484D30BB50e90678676565";
+const CONTRACT_ADDRESS_ANVIL = "0xa5eE245663390E0Acf3F89e3cAFc0a56ba8Bb1b7";
 
-const HARDHAT_ID = '1337';
-const RINKEBY_ID = '4';
+
+const POLYGON_ID = '137';
 
 const initialize = async (stateManagement) => {
   const { setAccount, setNetworkError, resetState } = stateManagement;
@@ -16,7 +16,7 @@ const initialize = async (stateManagement) => {
 
     const [selectedAddress] = await window.ethereum.enable();
 
-    if (window.ethereum.networkVersion !== HARDHAT_ID && window.ethereum.networkVersion !== RINKEBY_ID) {
+    if (window.ethereum.networkVersion !== POLYGON_ID) {
       setNetworkError("Please connect Metamask to Polygon network")
 
       return;
