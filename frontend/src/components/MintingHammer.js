@@ -6,6 +6,11 @@ import TheForge from "../contracts/TheForge.json";
 
 const ERROR_CODE_TX_REJECTED_BY_USER = 4001;
 
+const HAMMER_POLYGON = "0xA66Dcb378A568491d3484D30BB50e90678676565";
+const HAMMER_RINKEBY = "0x358d5120491daBc7F5f7A7AA812CE2d19eE65BD5";
+
+const ADDR_HAMMER = process.env.NODE_ENV === "development" ? HAMMER_RINKEBY : HAMMER_POLYGON
+
 const _getRpcErrorMessage = (error) => {
   if (error.data) {
     return error.data.message;
@@ -21,16 +26,14 @@ const MintingHammer = (state) => {
   const { hasInvite, setHasInvite, theForgeSC, networkError, setNetworkError, txBeingSent, setTxBeingSent, txSuccess, setTxSuccess } = state.props;
 
   useEffect(() => {
-    const CONTRACT_ADDRESS_THEFORGE = "0xA66Dcb378A568491d3484D30BB50e90678676565";
     
     async function inviteCheck() {
       
       try {
-        
         const [selectedAddress] = await window.ethereum.enable();
         const provider = new ethers.providers.Web3Provider(window.ethereum);
         const signer = provider.getSigner();
-        const theForgeContract = new ethers.Contract(CONTRACT_ADDRESS_THEFORGE, TheForge.abi, signer);
+        const theForgeContract = new ethers.Contract(ADDR_HAMMER, TheForge.abi, signer);
   
         const balanceInvite = await theForgeContract.hasInvite(selectedAddress);
   
@@ -102,12 +105,12 @@ const MintingHammer = (state) => {
     <div className="bg-white rounded-lg">
       <div className="px-4 sm:px-8 py-3">
         <h3 className="text-lg sm:text-xl px-10 sm:px-16 md:px-24 lg:px-36 leading-6 font-medium text-black">Who will you summon?</h3>
-        <div className="text-gray-600 text-base md:text-lg mt-2">
-            { hasInvite >= 0 && `${hasInvite} invitation${hasInvite > 1 ? "s" : ""} left`}
-        </div>
+        <p className="text-gray-600 text-sm md:text-base">
+            {hasInvite} invitation{hasInvite > 1 ? "s" : ""} left
+        </p>
         <form className="mt-3 sm:items-center">
           <div className="w-full sm:max-w-lg">
-            <label htmlFor="email" className="sr-only">
+            <label className="sr-only">
               Ethereum address
             </label>
             <input

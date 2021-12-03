@@ -7,9 +7,10 @@ export function Notification({ message, dismiss, isTxSuccess }) {
 
   const [show, setShow] = useState(true)
 
-  let title = isTxSuccess ? "Successfull Transaction" : "Error"
+  let Title = isTxSuccess ? "Successfull Transaction" : "Error"
   const Icon = isTxSuccess ? CheckCircleIcon : ExclamationIcon
 
+  let messageFinal = isTxSuccess ? "You're friend just received a Hammer. He/her can apply to the Forge at app.theforge.land/#/register" : message
   // console.log(`Mined, see transaction: https://rinkeby.etherscan.io/tx/${tx.hash}`);
 
   return (
@@ -41,8 +42,8 @@ export function Notification({ message, dismiss, isTxSuccess }) {
                     />
                   </div>
                   <div className="ml-3 w-0 flex-auto pt-0.5">
-                    <p className="font-medium text-gray-900">{title}</p>
-                    <p className="text-sm text-gray-500">{message}</p>
+                    <p className="font-medium text-gray-900">{Title}</p>
+                    <p className="text-sm text-gray-500">{messageFinal}</p>
                   </div>
                   <div className="ml-4 flex-shrink-0 flex">
                     <button
