@@ -73,7 +73,7 @@ export function HomePage({ networkError, dismiss, account, hasInvite, hasHammer,
             <img src={anvil_emoji} className="w-20 h-20 sm:w-24 sm:h-24 lg:w-32 lg:h-32" alt="anvil" />
             <img src={Hammer_emoji} className="w-20 h-20 sm:w-24 sm:h-24 lg:w-32 lg:h-32" alt="hammer" />
           </div>
-          <h1 className="text-5xl sm:text-6xl lg:text-7xl bold mt-4">The Forge</h1>
+          <h1 className="text-5xl sm:text-6xl lg:text-7xl bold mt-4">Jericho</h1>
           <p className="text-lg sm:text-xl mt-6 mx-6 sm:mb-10">
             A place where crypto entrepreneurs learn, meet and buidl together.
           </p>
