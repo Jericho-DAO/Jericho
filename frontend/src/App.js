@@ -1,24 +1,24 @@
 import React, { useState } from "react"
 import { Outlet, Routes, Route } from 'react-router-dom';
 
-import Summon from './components/Summon';
+import Mint from './components/Mint';
 import { NavBar } from './components/presentationals/NavBar';
 import initialize from './components/Initialize.js';
 import { NoWalletDetected } from './components/presentationals/NoWalletDetected';
-import TheRegister from './components/TheRegister';
+import Join from './components/Join';
 import { HomePage } from './components/presentationals/HomePage';
 import { hashMessage } from '@ethersproject/hash';
 
 export default function App() {
 
-	const [ account, setAccount ] = useState(undefined);
-	const [ hasHammer, setHasHammer ] = useState(false);
-	const [ theForgeSC, setTheForgeSC ] = useState(false);
-	const [ hasAnvil, setHasAnvil ] = useState(false);
-	const [ hasInvite, setHasInvite ] = useState(false);
-	const [ networkError, setNetworkError ] = useState(undefined);
-	const [ txBeingSent, setTxBeingSent ] = useState(undefined)
-  const [ txSuccess, setTxSuccess ] = useState(undefined);
+	const [account, setAccount] = useState(undefined);
+	const [hasHammer, setHasHammer] = useState(false);
+	const [theForgeSC, setTheForgeSC] = useState(false);
+	const [hasAnvil, setHasAnvil] = useState(false);
+	const [hasInvite, setHasInvite] = useState(false);
+	const [networkError, setNetworkError] = useState(undefined);
+	const [txBeingSent, setTxBeingSent] = useState(undefined)
+	const [txSuccess, setTxSuccess] = useState(undefined);
 
 	const resetState = () => {
 		setAccount(undefined)
@@ -28,7 +28,7 @@ export default function App() {
 		setHasAnvil(false)
 		setHasInvite(false)
 	}
-	
+
 	if (window.ethereum === undefined) {
 		return <NoWalletDetected />;
 	}
@@ -52,16 +52,16 @@ export default function App() {
 					connectWallet={connectWallet}
 					account={account}
 				/>
-					<Outlet />
+				<Outlet />
 			</div>
 		);
 	}
 
 	return (
 		<Routes>
-			<Route  element={<Layout />}>
+			<Route element={<Layout />}>
 
-				<Route 
+				<Route
 					path="/"
 					element={
 						<HomePage
@@ -76,19 +76,19 @@ export default function App() {
 				/>
 
 				<Route
-					path="summon"
+					path="mint"
 					element={
-						<Summon props={{
-							account, hasAnvil, hasInvite, setHasInvite, theForgeSC, networkError, setNetworkError, 
+						<Mint props={{
+							account, hasAnvil, hasInvite, setHasInvite, theForgeSC, networkError, setNetworkError,
 							txBeingSent, setTxBeingSent, txSuccess, setTxSuccess
-						}}/>
+						}} />
 					}
 				/>
 
-				<Route 
-					path="register"
+				<Route
+					path="join"
 					element={
-						<TheRegister props={{ hasHammer, account, networkError, setNetworkError }}/>
+						<Join props={{ hasHammer, account, networkError, setNetworkError }} />
 					}
 				/>
 
@@ -96,7 +96,7 @@ export default function App() {
 					path="*"
 					element={
 						<main className="bg-black text-white overflow-scroll">
-								<p className="text-3xl semibold mt-20 text-center">There's nothing here!</p>
+							<p className="text-3xl semibold mt-20 text-center">There's nothing here!</p>
 						</main>
 					}
 				/>

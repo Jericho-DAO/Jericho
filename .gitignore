@@ -5,7 +5,8 @@ coverage.json
 typechain
 yarn.lock
 package-lock.json
-
+*.DS_Store*
+.DS_Store
 #Hardhat files
 cache
 artifacts

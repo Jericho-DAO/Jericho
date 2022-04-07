@@ -10,8 +10,7 @@ export function Notification({ message, dismiss, isTxSuccess }) {
   let Title = isTxSuccess ? "Successfull Transaction" : "Error"
   const Icon = isTxSuccess ? CheckCircleIcon : ExclamationIcon
 
-  let messageFinal = isTxSuccess ? "You're friend just received a Hammer. He/her can apply to the Forge at app.jericho.gg/#/register" : message
-  // console.log(`Mined, see transaction: https://rinkeby.etherscan.io/tx/${tx.hash}`);
+  let messageFinal = isTxSuccess ? "You're friend just received a Hammer. He/her can apply to the Forge at app.jericho.gg/#/join" : message
 
   return (
     <>

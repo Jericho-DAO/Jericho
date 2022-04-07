@@ -20,33 +20,33 @@ const _getRpcErrorMessage = (error) => {
 }
 
 const MintingHammer = (state) => {
-    
-  const [ addressInvitee, setAddressInvitee ] = useState("");
+
+  const [addressInvitee, setAddressInvitee] = useState("");
 
   const { hasInvite, setHasInvite, theForgeSC, networkError, setNetworkError, txBeingSent, setTxBeingSent, txSuccess, setTxSuccess } = state.props;
 
   useEffect(() => {
-    
+
     async function inviteCheck() {
-      
+
       try {
         const [selectedAddress] = await window.ethereum.enable();
         const provider = new ethers.providers.Web3Provider(window.ethereum);
         const signer = provider.getSigner();
         const theForgeContract = new ethers.Contract(ADDR_HAMMER, TheForge.abi, signer);
-  
+
         const balanceInvite = await theForgeContract.hasInvite(selectedAddress);
-  
+
         let numberInvite = 0;
-        
-        if (balanceInvite._hex !== undefined ) {
+
+        if (balanceInvite._hex !== undefined) {
           const bigNumInstance = ethers.BigNumber.from(balanceInvite);
           numberInvite = bigNumInstance.toNumber();
 
-          if (numberInvite !== hasInvite ) {setHasInvite(numberInvite);}
+          if (numberInvite !== hasInvite) { setHasInvite(numberInvite); }
         }
-  
-      } catch(error) {
+
+      } catch (error) {
         console.log(error);
       }
     }
@@ -58,7 +58,7 @@ const MintingHammer = (state) => {
   const mintHammer = async () => {
     const validAddress = ethers.utils.isAddress(addressInvitee);
 
-    if(validAddress === false) {
+    if (validAddress === false) {
       return setNetworkError("Enter a valid address");
     }
 
@@ -94,7 +94,7 @@ const MintingHammer = (state) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    if (hasInvite > 0 ) {
+    if (hasInvite > 0) {
       mintHammer();
     } else {
       setNetworkError("Sorry, you have no invitation left");
@@ -104,9 +104,8 @@ const MintingHammer = (state) => {
   return (
     <div className="bg-white rounded-lg">
       <div className="px-4 sm:px-8 py-3">
-        <h3 className="text-lg sm:text-xl px-10 sm:px-16 md:px-24 lg:px-36 leading-6 font-medium text-black">Who will you summon?</h3>
         <p className="text-gray-600 text-sm md:text-base">
-            {hasInvite} invitation{hasInvite > 1 ? "s" : ""} left
+          You have {hasInvite} invitation{hasInvite > 1 ? "s" : ""} left
         </p>
         <form className="mt-3 sm:items-center">
           <div className="w-full sm:max-w-lg">
@@ -127,7 +126,7 @@ const MintingHammer = (state) => {
             className="mt-4 inline-flex items-center justify-center px-6 py-1 sm:py-2 border border-gray-500 shadow-sm font-medium rounded-md text-black bg-white hover:bg-gray-300 sw-auto sm:text-sm"
             onClick={handleSubmit}
           >
-            Summon
+            Mint
           </button>
         </form>
         {txBeingSent && (
@@ -150,5 +149,5 @@ const MintingHammer = (state) => {
     </div>
   )
 }
- 
+
 export default MintingHammer;

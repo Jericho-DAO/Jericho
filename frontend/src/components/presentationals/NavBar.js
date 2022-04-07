@@ -5,8 +5,8 @@ import { NavLink } from "react-router-dom";
 import logo from "../../images/Logo.png";
 
 const navigation = [
-  { name: 'Summon', to: 'summon' },
-  { name: 'Register', to: 'register' },
+  { name: 'Mint', to: 'mint' },
+  { name: 'Join', to: 'join' },
 ]
 
 function classNames(...classes) {

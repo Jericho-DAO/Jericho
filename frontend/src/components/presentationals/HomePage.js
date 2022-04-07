@@ -5,31 +5,31 @@ import anvil_emoji from "../../images/anvil_emoji.png";
 import Hammer_emoji from "../../images/Hammer_emoji.png";
 import { NavLink } from 'react-router-dom';
 
-function SummonButton() {
+function MintButton() {
   return (
-    <NavLink to="/summon">
+    <NavLink to="/mint">
       <button
         type="button"
         className="inline-flex items-center px-4 py-2 mt-6 border border-transparent text-lg
                   font-medium rounded-md shadow-sm text-black bg-white hover:bg-gray-300"
       >
         <img src={anvil_emoji} className="w-5 h-5 sm:w-8 sm:h-8 mr-3" alt="anvil" />
-        Summon
+        Mint
       </button>
     </NavLink>
   )
 }
 
-function RegisterButton() {
+function JoinButton() {
   return (
-    <NavLink to="/register">
+    <NavLink to="/join">
       <button
         type="button"
         className="inline-flex items-center px-4 py-2 mt-6 border border-transparent text-lg
                   font-medium rounded-md shadow-sm text-black bg-white hover:bg-gray-300"
       >
         <img src={Hammer_emoji} className="w-5 h-5 sm:w-8 sm:h-8 mr-3" alt="hammer" />
-        Register
+        Join
       </button>
     </NavLink>
   )
@@ -38,21 +38,21 @@ function RegisterButton() {
 export function HomePage({ networkError, dismiss, account, hasInvite, hasHammer, hasAnvil }) {
 
   function displayConnected() {
-     
+
     if (hasAnvil || hasHammer) {
       return (
         <div className="text-lg p-4 text-center">
           <div className="mt-10 md:mt-1 p-2 px-6 rounded text-center text-white ">
-            <p>You are the proud owner of {hasAnvil ? "an Anvil " : "" } {(hasAnvil && hasHammer) ? "and " : ""} {hasHammer ? "a Hammer" : ""}</p>
+            <p>You are the proud owner of {hasAnvil ? "an Anvil " : ""} {(hasAnvil && hasHammer) ? "and " : ""} {hasHammer ? "a Hammer" : ""}</p>
             {hasAnvil ? (<div>You have {hasInvite} invitation{hasInvite > 1 ? "s" : ""} left </div>) : ""}
-            
 
-            { hasAnvil ? SummonButton() : RegisterButton()}
+
+            {hasAnvil ? MintButton() : JoinButton()}
 
           </div>
         </div>
       )
-    } 
+    }
 
     return ("You have no Anvil nor Hammer")
   }
@@ -75,16 +75,16 @@ export function HomePage({ networkError, dismiss, account, hasInvite, hasHammer,
           </div>
           <h1 className="text-5xl sm:text-6xl lg:text-7xl bold mt-4">Jericho</h1>
           <p className="text-lg sm:text-xl mt-6 mx-6 sm:mb-10">
-            A place where crypto entrepreneurs learn, meet and buidl together.
+            Where web3 builders meet, learn, and build together.
           </p>
 
         </div>
-        
-        { account ? displayConnected() : displayNotConnected() }
+
+        {account ? displayConnected() : displayNotConnected()}
 
       </div>
 
-      { networkError && (<Notification message={networkError} dismiss={dismiss}/>) }
+      {networkError && (<Notification message={networkError} dismiss={dismiss} />)}
 
     </div>
   );
