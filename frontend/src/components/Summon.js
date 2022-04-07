@@ -52,7 +52,7 @@ const Summon = (state) => {
               <li>The Hammer doesn't give access to The Forge. It's a pass <NavLink to="/register" className="underline"> to apply</NavLink></li>
               <li>Our knights review every application.</li>
               <li>Accepted members join as apprentices. After accomplishing simple quests, they get lifetime access in the form of an Anvil NFT.</li>
-              <li>Declined applicants can transfer their Hammers to friends or sell them on <a href="https://opensea.io/collection/the-forge-hammer">OpenSea</a>.</li> 
+              <li>Declined applicants can transfer their Hammers to friends or sell them on <a href="https://opensea.io/collection/hammers-of-jericho">OpenSea</a>.</li> 
             </div>
           </ul>
         </div>
