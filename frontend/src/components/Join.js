@@ -17,7 +17,7 @@ const Join = (state) => {
   function displayHasHammer() {
     return (
       <div>
-        <p className="sm:text-xl text-center mb-6 sm:mb-8">Congratulations, you're own a Hammer of Jericho.</p>
+        <p className="sm:text-xl text-center mb-6 sm:mb-8">Congratulations, you own a Hammer of Jericho.</p>
         <iframe
           title="Airtable join"
           src="https://airtable.com/embed/shr8SeKKTQlnJJpO4?backgroundColor=gray"
@@ -32,7 +32,7 @@ const Join = (state) => {
       <div className="flex flex-grow-0 justify-center items-center">
         <div className="text-lg semibold mt-4 md:mt-10 p-2 px-6 rounded text-center text-black bg-white">
           <p>You have no Hammer</p>
-          <p>Sorry but you cannot join</p>
+          <p>Sorry, but you cannot join</p>
         </div>
       </div>
     )
