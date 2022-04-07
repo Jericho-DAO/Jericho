@@ -51,7 +51,7 @@ const Mint = (state) => {
             <li>Invites are Hammer NFTs minted on Polygon.</li>
             <li>The Hammer of Jericho doesn't give access. It's a pass to apply.</li>
             <li>Insert your friend's ETH wallet address and mint a Hammer on Polygon (use a <a href="https://matic.supply/" className="underline">faucet</a>).</li>
-            <li>Tell your friend to apply via this <NavLink to="/join" className="underline">link</NavLink></li>
+            <li>Tell your friend to apply via this <NavLink to="/join" className="underline">link</NavLink>.</li>
             <li>The Guardians of Jericho review every application.</li>
           </div>
         </ul>
